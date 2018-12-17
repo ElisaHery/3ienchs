@@ -1,0 +1,14 @@
+#footer {
+  background: black;
+  color: white;
+  height: 100px;
+  position: relative;
+  top: 55px;
+  width: 100%;
+  //flex
+  display: flex;
+  // justify-content: center;
+  .pfooter {
+    margin: auto 50px auto 50px;
+  }
+}

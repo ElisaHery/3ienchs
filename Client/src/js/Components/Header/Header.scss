@@ -1,0 +1,47 @@
+.header-nav {
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  height: 55px;
+  position: fixed;
+    z-index: 3;
+    width: 100%;
+
+  img.minilogo {
+    max-width: 50px;
+    max-height: 40px;
+    width: auto;
+    height: auto;
+  }
+
+  img.right_icons {
+    color: white;
+    width: 50px;
+    height: 30px;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    li {
+      font-family: "roadgeek_2005_engschriftRg";
+      font-size: 25px;
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+
+    .li_left {
+      padding-right: 40px;
+    }
+    .li_right {
+      padding-right: 40px;
+    }
+  }
+}

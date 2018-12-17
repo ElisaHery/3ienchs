@@ -1,0 +1,116 @@
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, address, em, img, strong,ol, ul, li,
+fieldset, form,table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside,figure, figcaption, footer, header, hgroup,
+menu, nav, output, section, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	text-decoration: none;
+}
+
+@font-face {
+    font-family:'roadgeek_2005_engschriftRg';
+    src: url('../font/Roadgeek/roadgeek_2005_engschrift-webfont.woff2') format('woff2'),
+         url('../font/Roadgeek/roadgeek_2005_engschrift-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nicknameregular';
+    src: url('../font/Nickname/pizzadude.dk_-_nickname-webfont.woff2') format('woff2'),
+         url('../font/Nickname/pizzadude.dk_-_nickname-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal; }
+
+
+
+/* HEADER  */
+header#header_ppal {
+	/* padding-top: 10px; */
+	background: black;
+	display: flex;
+	height: 50px;
+  position: absolute;
+  width: 100%;
+	line-height: 50px;
+}
+
+.minilogo {
+	margin: 3px 20px 0px 20px;
+	max-width:50px;
+  max-height:40px;
+  width: auto;
+  height: auto;
+}
+
+.minilogo2 {
+	margin: 7px 20px 0px 20px;
+	max-width:50px;
+  max-height:30px;
+  width: auto;
+  height: auto;
+}
+
+ul.nav {
+display: flex;
+}
+
+li.nav-item {
+	list-style: none;
+	color: white;
+	font-family: 'roadgeek_2005_engschriftRg';
+	font-size: 1.3em;
+}
+
+li.nav-item > a {
+	color: white;
+	line-height: 50px;
+	margin-left: 3vw;
+
+}
+
+
+
+/* PAGE 1 ACCUEIL */
+section#page_accueil {
+  background: #ff0058;
+  height: 100vh;
+}
+
+section#page_accueil > p:first-child {
+  color: black;
+  font-family: 'roadgeek_2005_engschriftRg';
+  font-size: 1.3em;
+  font-weight: lighter;
+	padding-top: 70px;
+  text-align: center;
+}
+
+section#page_accueil > figure {
+  margin: auto;
+  padding-top: 10vh;
+  width: 50%;
+}
+
+section#page_accueil  > figure > img {
+  width: 100%;
+}
+
+p#p1_nosbieres {
+  color: white;
+  border : 2px solid white;
+  font-family: 'roadgeek_2005_engschriftRg';
+  font-size: 1.5em;
+  margin: auto;
+  margin-top: 30px;
+  padding: 10px 15px;
+  text-align: center;
+  width: 150px;
+}

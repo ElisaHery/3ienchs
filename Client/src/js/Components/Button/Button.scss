@@ -1,0 +1,28 @@
+.button {
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: solid;
+  font-family: "roadgeek_2005_engschriftRg";
+  font-size: 1.5em;
+  //   margin: 30px auto 30px auto;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 0.4s;
+  width: 150px;
+}
+
+.white {
+  color: white;
+  &:hover {
+    background: white;
+    color: #ff0066;
+  }
+}
+
+.black {
+  color: black;
+  &:hover {
+    background: black;
+    color: white;
+  }
+}

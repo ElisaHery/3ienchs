@@ -1,0 +1,18 @@
+#socialMediasContainer {
+  background: #ff0066;
+  border-radius: 2px 0px 0px 2px;
+  opacity: 0.8;
+  z-index: 3;
+  // position
+  position: fixed;
+  right: 0;
+  top: 300px;
+  //flex
+  display: flex;
+  flex-direction: column;
+}
+
+.SMicon {
+  margin: 0px 3px 0px 5px;
+  width: 40px;
+}

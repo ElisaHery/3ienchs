@@ -5,8 +5,8 @@
     "client": "cd client && yarn start",
     "server": "nodemon ./index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build-all": "npm install && cd Client && npm install",
-    "start": "npm run build-all && npm run dev"
+    "build": "npm install && cd Client && npm install",
+    "start": "npm run dev"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

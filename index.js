@@ -7,7 +7,7 @@ const express = require("express");
 const port = process.env.PORT || 5000;
 const app = express();
 // const baseURL = `http://localhost:${port}`;
-const api = require(__dirname + "/api");
+const api = require(__dirname + "/API");
 const cors = require("cors");
 app.use(cors());
 

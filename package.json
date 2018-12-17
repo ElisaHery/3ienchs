@@ -2,12 +2,12 @@
   "name": "example-create-react-app-express",
   "version": "1.0.0",
   "scripts": {
-    "client": "cd Client && yarn start",
+    "client": "cd Client && npm start",
     "server": "nodemon ./index.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "npm install && cd Client && npm install",
-    "postinstall": "cd Client && npm install && cd ..",
-    "start": "concurrently --kill-others-on-fail \"node ./index.js\" \"cd Client && npm start\""
+    "postinstall": "cd Client && npm install && npm run build && cd ..",
+    "start": "node ./index.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

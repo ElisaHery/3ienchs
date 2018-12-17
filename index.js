@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json()); // on  peut recevoir des données POST en json via req.body
 app.use(api.prefix, api.routers); // on préfixe chaque route des API par api/v1/
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/Client/build"));
 
 // ROUTES DES PAGES DE l"APPLICATION
 app.get("/", function(req, res) {

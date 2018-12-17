@@ -4,7 +4,7 @@
 // const serverDataGetter = require("./utils/serverside-data-getter");
 const express = require("express");
 // const http = require("http");
-const port = 5000;
+const port = process.env.PORT || 5000;
 const app = express();
 // const baseURL = `http://localhost:${port}`;
 const api = require(__dirname + "/api");

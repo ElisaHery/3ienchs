@@ -7,7 +7,7 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "npm install && cd Client && npm install",
     "postinstall": "cd Client && npm install && cd ..",
-    "start": "npm run dev"
+    "start": "concurrently --kill-others-on-fail \"node ./index.js\" \"cd client && npm start\""
   },
   "dependencies": {
     "body-parser": "^1.18.3",

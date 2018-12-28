@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import "./SocialMedias.scss";
 import twitter from "./../../../assets/icones/twitter.svg";
@@ -11,14 +11,26 @@ class SocialMedias extends Component {
     return (
       <Fragment>
         <div id="socialMediasContainer">
-          <a href="https://twitter.com/3ienchs" target="_blank">
-            <img src={twitter} className="SMicon" />
+          <a
+            href="https://twitter.com/3ienchs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={twitter} className="SMicon" alt="logoTwitter" />
           </a>
-          <a href="https://www.facebook.com/3ienchs/" target="_blank">
-            <img src={facebook} className="SMicon" />
+          <a
+            href="https://www.facebook.com/3ienchs/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={facebook} className="SMicon" alt="logoFacebook" />
           </a>
-          <a href="https://www.instagram.com/3ienchs/" target="_blank">
-            <img src={insta} className="SMicon" />
+          <a
+            href="https://www.instagram.com/3ienchs/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={insta} className="SMicon" alt="logoInstagram" />
           </a>
         </div>
       </Fragment>

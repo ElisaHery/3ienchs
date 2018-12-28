@@ -1,9 +1,9 @@
 // src/js/reducers/index.js
 
 const initialState = {
-  // filtered_price: 40,
-  // filtered_themes: [],
-  articlesPanier: []
+  articlesPanier: [],
+  connectedUser: false,
+  userName: ""
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,14 +12,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, articlesPanier: action.payload };
     // return { ...state, articles: [...state.articles, action.payload] }; --> on ajoute la valeur aux valeurs déjà existantes
 
-    //   case "FILTER_THEMES":
-    //     //return { ...state, filter_price: [action.payload] };
-    //     //console.log(action.payload);
-    //     // return {
-    //     return { ...state, filtered_themes: action.payload };
-    //   //   // ...state,
-    //   //   // filtered_themes: [...state.filtered_themes, action.payload]
-    //   // };
+    case "CONNECTED_USER":
+      //return { ...state, filter_price: [action.payload] };
+      console.log(action.payload);
+      // return {
+      return { ...state, userName: action.payload, connectedUser: true };
+    //   // ...state,
+    //   // filtered_themes: [...state.filtered_themes, action.payload]
+    // };
 
     //   case "FILTER_COLORS":
     //     //return { ...state, filter_price: [action.payload] };

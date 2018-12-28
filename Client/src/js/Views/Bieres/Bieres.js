@@ -5,7 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import SocialMedias from "../../Components/SocialMedias/SocialMedias";
 import BiereIndiv from "../../Components/BiereIndiv/BiereIndiv";
 
-import Button from "../../Components/Button/Button";
+// import Button from "../../Components/Button/Button";
 import PathToBack from "../../PathToBack";
 import "./Bieres.scss";
 

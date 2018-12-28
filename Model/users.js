@@ -28,8 +28,8 @@ const usersModel = function usersModel(connection) {
 
     //on vérifie si l'adresse mail existe
     connection.query(q, [email], function(err, data, fields) {
-      console.log(this.sql);
-      console.log("data ==>", data);
+      // console.log(this.sql);
+      // console.log("data ==>", data);
       if (err) return clbk({ err: "unknown" }, null);
       else {
         //si il y a une data correspondante, on vérifie la concordance du mot de passe
@@ -40,18 +40,28 @@ const usersModel = function usersModel(connection) {
           }
           //sinon --> mot de passe incorrect
           else {
-            return clbk({ error: "mot de passe incorrect" }, null);
+            return clbk({ message: "mot de passe incorrect" }, null);
           }
         }
 
         //sinon on ne renvoie rien
-        return clbk({ error: "adresse email introuvable" }, null);
+        return clbk({ message: "adresse email introuvable" }, null);
       }
     });
   };
 
+  const getByMail = function getUserByMail(clbk, mail) {
+    const sql = `SELECT * FROM users WHERE user_mail = ?`;
+    const q = connection.query(sql, mail, function(err, user) {
+      // console.log("user -->", user);
+      if (err) return clbk({ message: "adresse email inconnue" }, null);
+      return clbk(null, ...user);
+    });
+    // console.log(q.sql);
+  };
+
   //CREATION NOUVEL USER
-  const post = function createUser(clbk, input) {
+  const userInscription = function createUser(clbk, input) {
     const payload = [input.nom, input.prenom, input.mail, input.password];
     const q0 = "SELECT * FROM users WHERE user_mail = ?";
     const q =
@@ -65,12 +75,12 @@ const usersModel = function usersModel(connection) {
           connection.query(q, payload, function(err, results, fields) {
             // console.log(this.sql);
             if (err) return clbk(err, null);
-            else return clbk(null, results);
+            else return clbk(null, results, payload);
           });
         } else {
           return clbk(
             //sinon : erreur
-            { error: "cette adresse e-mail est déjà liée à un compte" },
+            { message: "cette adresse e-mail est déjà liée à un compte" },
             null
           );
         }
@@ -109,7 +119,8 @@ const usersModel = function usersModel(connection) {
   return {
     get,
     UserLogin,
-    post,
+    getByMail,
+    userInscription,
     update,
     remove
   };

@@ -39,7 +39,7 @@ class BiereIndivClass extends Component {
     return (
       <Fragment>
         <div id="biereIndivContainer">
-          <img src={this.props.srcImage} />
+          <img src={this.props.srcImage} alt={this.props.name} />
           <h1>{this.props.name}</h1>
           <h2>{this.props.type}</h2>
           <p>{this.props.descr}</p>

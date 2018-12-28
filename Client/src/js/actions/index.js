@@ -5,3 +5,8 @@ export const AddPanier = articlesToAdd => ({
   type: "ADD_PANIER",
   payload: articlesToAdd
 });
+
+export const ConnectedUser = connectedUser => ({
+  type: "CONNECTED_USER",
+  payload: connectedUser
+});

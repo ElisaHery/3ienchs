@@ -4,6 +4,7 @@ import { ConnectedUser } from "./../../actions";
 
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer";
+import ClientDashboard from "../../Components/ClientDashboard/ClientDashboard";
 import SocialMedias from "../../Components/SocialMedias/SocialMedias";
 import PathToBack from "../../PathToBack";
 
@@ -83,7 +84,7 @@ class LoginClass extends Component {
         .then(response => {
           // console.log(response[0].user_nom);
           console.log(response);
-          this.props.ConnectedUser(response.user_prenom);
+          this.props.ConnectedUser(response);
           this.setState({ nouvelInscrit: false });
         })
         .catch(err => {
@@ -142,13 +143,14 @@ class LoginClass extends Component {
         {connectedUser ? (
           <div className="loginPageWrap">
             <h1>ESPACE CLIENT</h1>
-            <section className="loginWrap">
+            {/* <section className="loginWrap">
               <div className="loginMiniWrap">
                 <h2>
                   Vous êtes connecté-e, bienvenue {this.props.filters.userName}!
                 </h2>
               </div>{" "}
-            </section>{" "}
+            </section>{" "} */}
+            <ClientDashboard />
           </div>
         ) : (
           // SI USER PAS CONNECTE
@@ -176,7 +178,7 @@ class LoginClass extends Component {
                       onChange={e => this.handleChange(e)}
                     />
                     <input
-                      type="text"
+                      type="password"
                       name="password"
                       placeholder="mot de passe"
                       onChange={e => this.handleChange(e)}

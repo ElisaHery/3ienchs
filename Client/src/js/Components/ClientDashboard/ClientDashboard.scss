@@ -1,0 +1,27 @@
+.dashboardContainer {
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  margin: 20px auto 20px auto;
+  width: 70%;
+
+  .menuDashboard {
+    background: white;
+    border-radius: 10px;
+    margin-right: 5px;
+    width: 23%;
+    ul {
+      li {
+        cursor: pointer;
+        margin: 20px;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.3em;
+      }
+    }
+  }
+  .dashboard {
+    background: white;
+    border-radius: 10px;
+    width: 75%;
+  }
+}

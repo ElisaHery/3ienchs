@@ -12,14 +12,14 @@ const mapStateToProps = state => {
   return {
     filters: {
       connectedUser: state.connectedUser,
-      userName: state.userName
+      userPrenom: state.userPrenom
     }
   };
 };
 
 class HeaderClass extends Component {
   render() {
-    const userName = this.props.filters.userName;
+    const userPrenom = this.props.filters.userPrenom;
     const connectedUser = this.props.filters.connectedUser;
 
     return (
@@ -62,7 +62,7 @@ class HeaderClass extends Component {
           </li> */}
           {connectedUser ? (
             <li className="li_right">
-              <Link to="/login"> {userName} </Link>
+              <Link to="/login"> {userPrenom} </Link>
             </li>
           ) : (
             <li className="li_right">

@@ -3,7 +3,9 @@
 const initialState = {
   articlesPanier: [],
   connectedUser: false,
-  userName: ""
+  userPrenom: "",
+  userNom: "",
+  userID: ""
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,9 +16,15 @@ const rootReducer = (state = initialState, action) => {
 
     case "CONNECTED_USER":
       //return { ...state, filter_price: [action.payload] };
-      console.log(action.payload);
+      console.log("reçu du login ==>", action.payload);
       // return {
-      return { ...state, userName: action.payload, connectedUser: true };
+      return {
+        ...state,
+        userPrenom: action.payload.user_prenom,
+        userNom: action.payload.user_nom,
+        userID: action.payload.user_id,
+        connectedUser: true
+      };
     //   // ...state,
     //   // filtered_themes: [...state.filtered_themes, action.payload]
     // };

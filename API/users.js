@@ -41,7 +41,8 @@ const usersApi = function usersApi(connection) {
         .then(function(match) {
           console.log(match);
           // si le password est invalide, retourner une erreur au client
-          if (!match) return res.status(401).send({ message: "login failed" });
+          if (!match)
+            return res.status(401).send({ message: "mot de passe incorrect" });
 
           // tout est ok => retourner l'objet user (sans password, etc.) au client
           // accompagné d'un token dans l'entête HTTP pour sécuriser l'accès au dashboard.

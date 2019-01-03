@@ -4,6 +4,8 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Button from "../../Components/Button/Button";
 import SocialMedias from "../../Components/SocialMedias/SocialMedias";
+import SideMenu from "../../Components/BurgerMenu/SideMenu";
+import Backdrop from "../../Components/BurgerMenu/Backdrop.js";
 // import PathToBack from "../../PathToBack";
 
 import Logo from "./../../../assets/logos/3ienchs_baseline.png";
@@ -15,47 +17,35 @@ class App extends Component {
   state = {
     response: [],
     post: "",
-    responseToPost: ""
+    responseToPost: "",
+    sideMenuOpen: false
   };
 
-  componentDidMount() {
-    // this.callApi(PathToBack + "bieres")
-    //   .then(res => {
-    //     console.log(res);
-    //     this.setState({ response: res });
-    //   })
-    //   // .then(console.log(this.state.response))
-    //   .catch(err => console.log(err));
-  }
+  burgerToggleClickHandler = () => {
+    console.log("coucou depuis home");
+    this.setState(previousState => {
+      return { sideMenuOpen: !previousState.sideMenuOpen };
+    });
+  };
 
-  // callApi = async url => {
-  //   const response = await fetch(url);
-  //   const body = await response.json();
-  //   if (response.status !== 200) throw Error(body.message);
-  //   // console.log(body);
-  //   return body;
-  // };
-
-  // handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const response = await fetch("/api/world", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({ post: this.state.post })
-  //   });
-  //   const body = await response.text();
-  //   this.setState({ responseToPost: body });
-  // };
+  backdropClickHandler = () => {
+    this.setState({ sideMenuOpen: false });
+  };
 
   render() {
-    // if (this.state.response.length === 0) return null;
-    // console.log(this.state.response);
+    let backdrop;
 
+    if (this.state.sideMenuOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
     return (
       <Fragment>
-        <Header className="App-header" />
+        <Header
+          className="App-header"
+          burgerClickHandler={this.burgerToggleClickHandler}
+        />
+        <SideMenu show={this.state.sideMenuOpen} />
+        {backdrop}
 
         <section id="page_accueil">
           <p>

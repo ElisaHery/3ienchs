@@ -1,0 +1,30 @@
+.sidemenu {
+  background: white;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50%;
+  max-width: 400px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+  z-index: 200;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    li {
+      margin: 0.5rem;
+      a {
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.5em;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.sidemenu.open {
+  transform: translateX(0);
+}

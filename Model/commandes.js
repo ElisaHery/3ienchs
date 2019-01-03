@@ -32,7 +32,7 @@ const commandesModel = function commandesModel(connection) {
   //USER : VOIR SON HISTORIQUE DE COMMANDES
   const getUserOldCommandes = function getUserOldCommandes(clbk, user_id) {
     const q =
-      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, det_id_produit, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1";
+      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, biere_nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1";
     connection.query(q, [user_id], function(err, data, fields) {
       // console.log(this.sql);
       // console.log(data);

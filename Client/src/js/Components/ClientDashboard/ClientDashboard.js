@@ -43,7 +43,7 @@ class ClientDashboardClass extends Component {
     // commandes en cours
     this.callApi(`${PathToBack}current_commandes_user/${userID}`)
       .then(res => {
-        // console.log("commandes en cours ==>", res);
+        console.log("commandes en cours ==>", res);
         this.setState({ currentCommandes: res });
       })
       .catch(err => console.log(err));
@@ -51,7 +51,7 @@ class ClientDashboardClass extends Component {
     // commandes passées
     this.callApi(`${PathToBack}old_commandes_user/${userID}`)
       .then(res => {
-        // console.log("commandes passées ==>", res);
+        console.log("commandes passées ==>", res);
         this.setState({ passedCommandes: res });
       })
       .catch(err => console.log(err));
@@ -76,11 +76,11 @@ class ClientDashboardClass extends Component {
           </div>
           <div className="dashboard">
             {this.state.showCommandes && (
-              <div>
+              <Fragment>
                 {" "}
-                <p>Mes commandes en cours</p>
+                <p className="title">Mes commandes en cours</p>
                 {this.state.currentCommandes.length !== 0 ? (
-                  <table>
+                  <table className="table_commandes">
                     <thead>
                       <tr>
                         <th>Numéro de la commande</th>
@@ -103,9 +103,9 @@ class ClientDashboardClass extends Component {
                 ) : (
                   <p className="p_board">Vous n'avez pas d'historique</p>
                 )}
-                <p>Mes commandes passées</p>{" "}
+                <p className="title">Mes commandes passées</p>{" "}
                 {this.state.passedCommandes.length !== 0 ? (
-                  <table>
+                  <table className="table_commandes">
                     <thead>
                       <tr>
                         <th>Numéro de la commande</th>
@@ -130,7 +130,7 @@ class ClientDashboardClass extends Component {
                 ) : (
                   <p className="p_board">Vous n'avez pas d'historique</p>
                 )}
-              </div>
+              </Fragment>
             )}
 
             {this.state.showAccount && <p>je suis mon compte</p>}

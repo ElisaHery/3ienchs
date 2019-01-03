@@ -61,7 +61,7 @@ module.exports = (function myAuthLib() {
   const removeSensitiveInfo = function removeSensitiveInfo(u) {
     if (!u) throw new Error("A User object is required as argument");
     const filteredUser = {};
-    const keys = ["user_password", "user_mail"];
+    const keys = ["user_password"];
 
     for (let key in keys) {
       delete u[keys[key]];

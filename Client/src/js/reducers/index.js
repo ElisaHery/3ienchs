@@ -5,7 +5,8 @@ const initialState = {
   connectedUser: false,
   userPrenom: "",
   userNom: "",
-  userID: ""
+  userID: "",
+  userMail: ""
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,7 +24,18 @@ const rootReducer = (state = initialState, action) => {
         userPrenom: action.payload.user_prenom,
         userNom: action.payload.user_nom,
         userID: action.payload.user_id,
+        userMail: action.payload.user_mail,
         connectedUser: true
+      };
+
+    case "LOGOUT_USER":
+      return {
+        ...state,
+        userPrenom: "",
+        userNom: "",
+        userID: "",
+        connectedUser: false,
+        userMail: ""
       };
     //   // ...state,
     //   // filtered_themes: [...state.filtered_themes, action.payload]

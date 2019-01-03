@@ -1,24 +1,24 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { ConnectedUser } from "./../../actions";
+import { ConnectedUser, LogoutUser } from "./../../actions";
 
 import PathToBack from "../../PathToBack";
 import "./ClientDashboard.scss";
 
 const mapDispatchToProps = dispatch => {
   return {
-    ConnectedUser: user => dispatch(ConnectedUser(user))
+    ConnectedUser: user => dispatch(ConnectedUser(user)),
+    LogoutUser: user => dispatch(LogoutUser(user))
   };
 };
 
 const mapStateToProps = state => {
   return {
-    filters: {
-      connectedUser: state.connectedUser,
-      userPrenom: state.userPrenom,
-      userNom: state.userNom,
-      userID: state.userID
-    }
+    connectedUser: state.connectedUser,
+    userPrenom: state.userPrenom,
+    userNom: state.userNom,
+    userID: state.userID,
+    userMail: state.userMail
   };
 };
 
@@ -39,7 +39,7 @@ class ClientDashboardClass extends Component {
   };
 
   componentDidMount() {
-    const userID = this.props.filters.userID;
+    const userID = this.props.userID;
     // commandes en cours
     this.callApi(`${PathToBack}current_commandes_user/${userID}`)
       .then(res => {
@@ -64,7 +64,16 @@ class ClientDashboardClass extends Component {
       showAccount: !this.state.showAccount
     });
   }
+
+  logOut(e) {
+    this.props.ConnectedUser(false);
+    window.location = "/";
+  }
+
   render() {
+    const userNom = this.props.userNom;
+    const userPrenom = this.props.userPrenom;
+    const userMail = this.props.userMail;
     return (
       <Fragment>
         <section className="dashboardContainer">
@@ -72,6 +81,7 @@ class ClientDashboardClass extends Component {
             <ul>
               <li onClick={e => this.toggleDashboard(e)}>Mes commandes</li>
               <li onClick={e => this.toggleDashboard(e)}>Mon compte</li>
+              <li onClick={e => this.logOut(e)}>Déconnexion</li>
             </ul>
           </div>
           <div className="dashboard">
@@ -133,7 +143,19 @@ class ClientDashboardClass extends Component {
               </Fragment>
             )}
 
-            {this.state.showAccount && <p>je suis mon compte</p>}
+            {this.state.showAccount && (
+              <Fragment>
+                <p>
+                  <span>Nom :</span> <span>{userNom}</span>
+                </p>
+                <p>
+                  <span>Prénom :</span> <span>{userPrenom}</span>
+                </p>
+                <p>
+                  <span>Mail :</span> <span>{userMail}</span>
+                </p>
+              </Fragment>
+            )}
           </div>
         </section>
       </Fragment>

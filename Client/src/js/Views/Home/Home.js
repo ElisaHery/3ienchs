@@ -4,8 +4,8 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Button from "../../Components/Button/Button";
 import SocialMedias from "../../Components/SocialMedias/SocialMedias";
-import SideMenu from "../../Components/BurgerMenu/SideMenu";
-import Backdrop from "../../Components/BurgerMenu/Backdrop.js";
+import SideMenu from "../../Components/Header/BurgerMenu/SideMenu";
+import Backdrop from "../../Components/Header/BurgerMenu/Backdrop.js";
 // import PathToBack from "../../PathToBack";
 
 import Logo from "./../../../assets/logos/3ienchs_baseline.png";
@@ -17,19 +17,7 @@ class App extends Component {
   state = {
     response: [],
     post: "",
-    responseToPost: "",
-    sideMenuOpen: false
-  };
-
-  burgerToggleClickHandler = () => {
-    console.log("coucou depuis home");
-    this.setState(previousState => {
-      return { sideMenuOpen: !previousState.sideMenuOpen };
-    });
-  };
-
-  backdropClickHandler = () => {
-    this.setState({ sideMenuOpen: false });
+    responseToPost: ""
   };
 
   render() {

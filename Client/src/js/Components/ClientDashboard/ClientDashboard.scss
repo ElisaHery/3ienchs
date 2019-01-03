@@ -16,6 +16,9 @@
         margin: 20px;
         font-family: "roadgeek_2005_engschriftRg";
         font-size: 1.3em;
+        &:last-child {
+          color: #ff0066;
+        }
       }
     }
   }

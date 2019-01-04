@@ -17,7 +17,7 @@ class Bieres extends Component {
   componentDidMount() {
     this.callApi(PathToBack + "bieres")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({ response: res });
       })
       // .then(console.log(this.state.response))
@@ -34,7 +34,7 @@ class Bieres extends Component {
 
   render() {
     if (this.state.response.length === 0) return null;
-    console.log(this.state.response);
+    // console.log(this.state.response);
     return (
       <Fragment>
         <Header />

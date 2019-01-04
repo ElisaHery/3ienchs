@@ -64,7 +64,7 @@ class App extends Component {
               <Button
                 path="/bieres"
                 // scriptColor="black"
-                margin="30px auto 60px auto"
+                margin="30px auto 30px auto"
                 text="NOS BIERES"
                 class="button black"
               />

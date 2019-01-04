@@ -5,16 +5,94 @@
   align-items: center;
   margin: 40px auto 20px auto;
   width: 30%;
-  min-width: 400px;
+  min-width: 320px;
   img {
-    width: 50%;
+    width: 100%;
     margin-bottom: 20px;
   }
 
   .pPanier {
     margin-top: 30px;
+    max-width: 50%;
+    text-align: center;
   }
   input {
     width: 40px;
   }
 }
+
+//   DEBUT ANIMATION
+
+article.contain {
+  perspective: 800px;
+
+  /* quand on survole article.contain on dit à la main de retourner  */
+  &:hover .une {
+    transform: rotateY(180deg);
+    // transform-origin: 189px;
+  }
+}
+
+article.contain,
+.avant,
+.arr {
+  height: 320px;
+  width: 320px;
+  figure {
+    margin: 0;
+  }
+}
+
+/* on règle la vitesse de rotation de la main */
+.main {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  .avant,
+  .arr {
+    backface-visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+    figure {
+      img {
+        border-radius: 10px;
+      }
+    }
+    p {
+    }
+  }
+
+  /* On configure tous les paramètres par défaut. ici la face avant passe par défaut devant */
+  .avant {
+    // background: black;
+    border-radius: 10px;
+    color: white;
+    //padding: 10px;
+    text-align: center;
+    transform: rotateY(0deg);
+    z-index: 2;
+    /* on peut ajouter un background si c'est un texte */
+  }
+
+  /* paramètres par défaut de la face arrière */
+  .arr {
+    transform: rotateY(180deg);
+    background: black;
+    opacity: 0.8;
+    p {
+      color: white;
+      // font-family: $ppal_font;
+      // line-height: 255px;
+      margin: auto;
+      text-align: center;
+      width: 70%;
+    }
+    .text_rotate {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+/* les classes avant et arrière vont apparaitre et disparaitre chacune leur tour */

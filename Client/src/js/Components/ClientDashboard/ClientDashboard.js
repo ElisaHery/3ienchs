@@ -59,10 +59,23 @@ class ClientDashboardClass extends Component {
 
   //switch entre l'affichage de la fenêtre des commandes ou du compte du client
   toggleDashboard(e) {
-    this.setState({
-      showCommandes: !this.state.showCommandes,
-      showAccount: !this.state.showAccount
-    });
+    var name = e.target.getAttribute("name");
+
+    if (this.state.showCommandes) {
+      if (name !== "showCommandes") {
+        this.setState({
+          showCommandes: !this.state.showCommandes,
+          showAccount: !this.state.showAccount
+        });
+      } else return null;
+    } else if (this.state.showAccount) {
+      if (name !== "showAccount") {
+        this.setState({
+          showCommandes: !this.state.showCommandes,
+          showAccount: !this.state.showAccount
+        });
+      } else return null;
+    }
   }
 
   logOut(e) {
@@ -79,8 +92,12 @@ class ClientDashboardClass extends Component {
         <section className="dashboardContainer">
           <div className="menuDashboard">
             <ul>
-              <li onClick={e => this.toggleDashboard(e)}>Mes commandes</li>
-              <li onClick={e => this.toggleDashboard(e)}>Mon compte</li>
+              <li name="showCommandes" onClick={e => this.toggleDashboard(e)}>
+                Mes commandes
+              </li>
+              <li name="showAccount" onClick={e => this.toggleDashboard(e)}>
+                Mon compte
+              </li>
               <li onClick={e => this.logOut(e)}>Déconnexion</li>
             </ul>
           </div>

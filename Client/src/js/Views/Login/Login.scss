@@ -2,7 +2,7 @@
   // background: #808080;
   background-image: url("https://elisahery.com/images3ienchs/cuves_goutenb.jpg");
   background-size: cover;
-  height: 100vh;
+  height: auto;
   width: 100%;
 
   position: relative;
@@ -17,6 +17,7 @@
   .loginWrap {
     display: flex;
     justify-content: center;
+    padding-bottom: 15vh;
 
     .loginMiniWrap {
       background: white;

@@ -39,10 +39,23 @@ class BiereIndivClass extends Component {
     return (
       <Fragment>
         <div id="biereIndivContainer">
-          <img src={this.props.srcImage} alt={this.props.name} />
+          {/* <img src={this.props.srcImage} alt={this.props.name} /> */}
+
+          <article className="contain">
+            <div className="main une">
+              <div className="avant">
+                <figure>
+                  <img src={this.props.srcImage} alt={this.props.name} />
+                </figure>
+              </div>
+              <div className="arr">
+                <p>{this.props.descr}</p>
+              </div>
+            </div>
+          </article>
+
           <h1>{this.props.name}</h1>
           <h2>{this.props.type}</h2>
-          <p>{this.props.descr}</p>
 
           <input type="number" onChange={this.handleChange} />
           <button onClick={this.handleClick}>ajouter au panier</button>

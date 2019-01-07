@@ -2,19 +2,19 @@ import React, { Component, Fragment } from "react";
 
 import Header from "../../Components/Header/Header.js";
 
-import "./Apropos.scss";
+import "./Legal.scss";
 
-class Apropos extends Component {
+class Legal extends Component {
   render() {
     return (
       <Fragment>
         <Header />
-        <div className="AproposPageWrap">
-          <h1>Je suis Apropos</h1>
+        <div className="legalPageWrap">
+          <h1>Je suis Legal</h1>
         </div>
       </Fragment>
     );
   }
 }
 
-export default Apropos;
+export default Legal;

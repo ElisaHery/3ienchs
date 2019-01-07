@@ -22,6 +22,11 @@ class HeaderClass extends Component {
     const userPrenom = this.props.userPrenom;
     const connectedUser = this.props.connectedUser;
     console.log(this.props.articlesPanier);
+    // Calcule le nombre total de bières dans le panier
+    let totalQty = 0;
+    this.props.articlesPanier.forEach(element => {
+      totalQty += element.quantity;
+    });
 
     return (
       <nav className="navigation">
@@ -84,7 +89,7 @@ class HeaderClass extends Component {
           </ul>
         </div>
         {this.props.articlesPanier.length > 0 ? (
-          <div className="articlesQty">{this.props.articlesPanier.length}</div>
+          <div className="articlesQty">{totalQty}</div>
         ) : (
           <div className="articlesQty" style={{ visibility: "hidden" }} />
         )}

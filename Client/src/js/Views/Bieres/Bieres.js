@@ -25,8 +25,8 @@ class Bieres extends Component {
 
     this.callApi(PathToBack + "specialsbieres")
       .then(res => {
-        // console.log(res);
-        this.setState({ specialsbieres: res });
+        console.log(res);
+        this.setState({ specialsBieres: res });
       })
       .catch(err => console.log(err));
   }
@@ -59,8 +59,7 @@ class Bieres extends Component {
           </div>
           <section id="bieresSecondPart">
             <h2 className="title-bieres">LES CLASSIQUES</h2>
-
-            <div className="bieres_classiques">
+            <div className="bieres_vignettes">
               {this.state.classicBieres.map(e => (
                 <BiereIndiv
                   name={e.nom}
@@ -74,13 +73,36 @@ class Bieres extends Component {
                 />
               ))}
             </div>
+            <h2 className="title-bieres">LES SPECIALES</h2>
+            <div className="bieres_vignettes">
+              {this.state.specialsBieres.length === 0 ? (
+                <p>Pas de bière spéciale</p>
+              ) : (
+                this.state.specialsBieres.map(e => (
+                  <BiereIndiv
+                    name={e.nom}
+                    srcImage={e.img}
+                    key={e.biere_id}
+                    type={e.type}
+                    descr={e.descr}
+                    degre={e.degre}
+                    IBU={e.IBU}
+                    EBC={e.EBC}
+                  />
+                ))
+              )}
+            </div>
           </section>
           <section id="bieresTarifs">
             <h1>TARIFS</h1>
             <p className="pTarifs">Bière à l'unité : 3€</p>
-            <p className="pTarifs">6 bières : 15€</p>
-            <p className="pTarifs">24 bières: 55,20€</p>
-            <p className="pVariete">Vous pouvez composer votre commande! </p>
+            <p className="pTarifs">6 bières classiques: 15€</p>
+            <p className="pTarifs">24 bières classiques: 55,20€</p>
+            {/* <p className="pTarifs">Bières spéciales : </p> */}
+            <p className="pVariete">
+              Les bières spéciales restent à 3€ l'unité peu importe la quantité
+              commandée{" "}
+            </p>
           </section>
         </section>
         <SocialMedias />

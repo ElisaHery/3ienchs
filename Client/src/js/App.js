@@ -6,6 +6,8 @@ import Bieres from "./Views/Bieres/Bieres.js";
 import Apropos from "./Views/Apropos/Apropos.js";
 import Panier from "./Views/Panier/Panier.js";
 import Login from "./Views/Login/Login.js";
+import Contact from "./Views/Contact/Contact.js";
+import Legal from "./Views/Legal/Legal.js";
 
 import "./App.css";
 
@@ -21,6 +23,8 @@ class App extends Component {
             <Route path="/vente" component={Apropos} />
             <Route path="/panier" component={Panier} />
             <Route path="/login" component={Login} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/legal" component={Legal} />
           </Switch>
         </Router>
       </Fragment>

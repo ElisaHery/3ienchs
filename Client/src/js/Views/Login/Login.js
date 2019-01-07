@@ -18,10 +18,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    filters: {
-      connectedUser: state.connectedUser,
-      userName: state.userName
-    }
+    connectedUser: state.connectedUser,
+    userName: state.userName
   };
 };
 
@@ -135,7 +133,7 @@ class LoginClass extends Component {
   }
 
   render() {
-    const connectedUser = this.props.filters.connectedUser;
+    const connectedUser = this.props.connectedUser;
     return (
       <Fragment>
         <Header />

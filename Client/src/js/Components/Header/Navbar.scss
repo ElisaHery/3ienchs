@@ -28,13 +28,15 @@
     }
   }
 
-  img.right_icons {
+  img.userIcon {
     color: white;
     width: 50px;
     height: 30px;
-    &:hover {
-      color: #ff0066;
-    }
+  }
+  img.basketIcon {
+    color: white;
+    width: 50px;
+    height: 35px;
   }
 
   .spacer {
@@ -71,6 +73,17 @@
       padding-right: 40px;
     }
   }
+
+  .articlesQty {
+    background: #ff0066;
+    border-radius: 100px;
+    font-family: "roadgeek_2005_engschriftRg";
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    transform: translate(-88px, 5px);
+    width: 20px;
+  }
 }
 
 @media (max-width: 849px) {
@@ -79,6 +92,9 @@
       li {
         display: none;
       }
+    }
+    .articlesQty {
+      display: none;
     }
   }
 }

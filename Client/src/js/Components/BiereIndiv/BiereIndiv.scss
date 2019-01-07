@@ -1,98 +1,267 @@
-#biereIndivContainer {
-  // position
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 40px auto 20px auto;
-  width: 30%;
-  min-width: 320px;
-  img {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+@media screen and (min-width: 769px) {
+  #biereIndivContainer {
+    // position
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 10px 20px 10px;
+    width: 30%;
+    min-width: 280px;
+    img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-  .pPanier {
-    margin-top: 30px;
-    max-width: 50%;
-    text-align: center;
-  }
-  input {
-    width: 40px;
-  }
-}
+    h2 {
+      margin-top: 10px;
+    }
+    .pPanier {
+      margin-top: 30px;
+      max-width: 50%;
+      text-align: center;
+    }
+    input {
+      width: 40px;
+    }
 
-//   DEBUT ANIMATION
+    .descr_responsive_container {
+      display: none;
+    }
 
-article.contain {
-  perspective: 800px;
-
-  /* quand on survole article.contain on dit à la main de retourner  */
-  &:hover .une {
-    transform: rotateY(180deg);
-    // transform-origin: 189px;
-  }
-}
-
-article.contain,
-.avant,
-.arr {
-  height: 320px;
-  width: 320px;
-  figure {
-    margin: 0;
-  }
-}
-
-/* on règle la vitesse de rotation de la main */
-.main {
-  transition: 0.6s;
-  transform-style: preserve-3d;
-
-  .avant,
-  .arr {
-    backface-visibility: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-    figure {
-      img {
-        border-radius: 10px;
+    .input_container {
+      display: flex;
+      margin: 10px;
+      .add_button {
+        background: #ff0066;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        margin: 5px;
+      }
+      input {
+        margin: 5px 0 5px 0;
+      }
+      input[type="number"]::-webkit-inner-spin-button {
+        opacity: 1;
       }
     }
-    p {
+  }
+
+  //   DEBUT ANIMATION
+
+  article.contain {
+    perspective: 800px;
+
+    /* quand on survole article.contain on dit à la main de retourner  */
+    &:hover .une {
+      transform: rotateY(180deg);
+      // transform-origin: 189px;
     }
   }
 
-  /* On configure tous les paramètres par défaut. ici la face avant passe par défaut devant */
-  .avant {
-    // background: black;
-    border-radius: 10px;
-    color: white;
-    //padding: 10px;
-    text-align: center;
-    transform: rotateY(0deg);
-    z-index: 2;
-    /* on peut ajouter un background si c'est un texte */
+  article.contain,
+  .avant,
+  .arr {
+    height: 280px;
+    width: 280px;
+    figure {
+      margin: 0;
+    }
   }
 
-  /* paramètres par défaut de la face arrière */
-  .arr {
-    transform: rotateY(180deg);
-    background: black;
-    opacity: 0.8;
-    p {
+  /* on règle la vitesse de rotation de la main */
+  .main {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    .avant,
+    .arr {
+      backface-visibility: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 5px;
+
+      figure {
+        img {
+          border-radius: 5px;
+        }
+      }
+      p {
+      }
+    }
+
+    /* On configure tous les paramètres par défaut. ici la face avant passe par défaut devant */
+    .avant {
+      // background: black;
+      border-radius: 5px;
+      box-shadow: 4px 4px 5px 0px #9b9b9b;
       color: white;
-      // font-family: $ppal_font;
-      // line-height: 255px;
-      margin: auto;
+      //padding: 10px;
       text-align: center;
+      transform: rotateY(0deg);
+      z-index: 2;
+      /* on peut ajouter un background si c'est un texte */
+    }
+
+    /* paramètres par défaut de la face arrière */
+    .arr {
+      transform: rotateY(180deg);
+      background: black;
+      // opacity: 0.8;
+      line-height: 280px;
+      text-align: center;
+      p {
+        color: white;
+        line-height: normal;
+        display: inline-block;
+        vertical-align: middle;
+        margin: auto;
+        text-align: center;
+        width: 70%;
+      }
+      .text_rotate {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  /* les classes avant et arrière vont apparaitre et disparaitre chacune leur tour */
+}
+
+@media screen and (max-width: 768px) {
+  #biereIndivContainer {
+    // position
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 10px 20px 10px;
+    width: 30%;
+    min-width: 280px;
+    img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .pPanier {
+      margin-top: 30px;
+      max-width: 50%;
+      text-align: center;
+    }
+    input {
+      width: 40px;
+    }
+
+    .descr_responsive_container {
+      background: #f3f1f1;
+      border-radius: 5px;
+      margin: 20px 0 20px 0;
+      min-height: 100px;
       width: 70%;
     }
-    .text_rotate {
-      transform: rotate(180deg);
+    .input_container {
+      display: flex;
+      margin: 10px;
+      .add_button {
+        background: #ff0066;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        margin: 5px;
+      }
+      input {
+        margin: 5px 0 5px 0;
+      }
+      input[type="number"]::-webkit-inner-spin-button {
+        opacity: 1;
+      }
+    }
+  }
+
+  //   DEBUT ANIMATION
+
+  article.contain {
+    perspective: 800px;
+
+    /* quand on survole article.contain on dit à la main de retourner  */
+    // &:hover .une {
+    //   transform: rotateY(180deg);
+    //   transform-origin: 189px;
+    // }
+  }
+
+  article.contain,
+  .avant,
+  .arr {
+    height: 280px;
+    width: 280px;
+    figure {
+      margin: 0;
+    }
+  }
+
+  /* on règle la vitesse de rotation de la main */
+  .main {
+    // transition: 0.6s;
+    // transform-style: preserve-3d;
+
+    .avant,
+    .arr {
+      backface-visibility: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+
+      figure {
+        img {
+          border-radius: 5px;
+        }
+      }
+      p {
+      }
+    }
+
+    /* On configure tous les paramètres par défaut. ici la face avant passe par défaut devant */
+    .avant {
+      border-radius: 5px;
+      box-shadow: 4px 4px 5px 0px #9b9b9b;
+      color: white;
+      //padding: 10px;
+      text-align: center;
+      // transform: rotateY(0deg);
+      z-index: 2;
+      /* on peut ajouter un background si c'est un texte */
+    }
+
+    /* paramètres par défaut de la face arrière */
+    .arr {
+      display: none;
+      // transform: rotateY(180deg);
+      background: black;
+      // opacity: 0.8;
+      line-height: 280px;
+      text-align: center;
+      // p {
+      //   color: white;
+      //   line-height: normal;
+      //   display: inline-block;
+      //   vertical-align: middle;
+      //   margin: auto;
+      //   text-align: center;
+      //   width: 70%;
+      // }
+      // .text_rotate {
+      //   transform: rotate(180deg);
+      // }
     }
   }
 }
-
-/* les classes avant et arrière vont apparaitre et disparaitre chacune leur tour */

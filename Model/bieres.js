@@ -3,16 +3,26 @@
 // @root/model/country.js
 
 const bieresModel = function bieresModel(connection) {
-  const get = function getBeers(clbk, id) {
+  const getClassicBieres = function getClassicBieres(clbk, id) {
     console.log(id);
     let q;
     if (id) {
       q = "SELECT * FROM bieres WHERE biere_id = ?";
     } else {
-      q = "SELECT * FROM bieres";
+      q = "SELECT * FROM bieres WHERE packable=1";
     }
     connection.query(q, [id], function(err, data, fields) {
       console.log(this.sql);
+      console.log(data);
+      if (err) return clbk(err, null);
+      else return clbk(null, data);
+    });
+  };
+
+  const getSpecialsBieres = function getSpecialsBieres(clbk) {
+    q = "SELECT * FROM bieres WHERE packable=0";
+    connection.query(q, function(err, data, fields) {
+      // console.log(this.sql);
       console.log(data);
       if (err) return clbk(err, null);
       else return clbk(null, data);
@@ -32,7 +42,7 @@ const bieresModel = function bieresModel(connection) {
     ];
     // console.log(payload);
     const q =
-      "INSERT into bieres (biere_nom, biere_type, biere_prixHT, biere_degre, biere_descr, biere_packable, biere_stock) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      "INSERT into bieres (nom, type, prixHT, degre, IBU, EBC, descr, artiste, packable, stock) VALUES (?, ?, ?, ?, ?, ?, ?)";
     connection.query(q, payload, function(err, results, fields) {
       // console.log(this.sql);
       if (err) return clbk(err, null);
@@ -42,7 +52,7 @@ const bieresModel = function bieresModel(connection) {
 
   const update = function updateBeer(clbk, input) {
     const q =
-      "UPDATE bieres SET biere_nom = ?, biere_type = ?, biere_prixHT = ?, biere_degre = ?, biere_descr = ?, biere_packable = ?, biere_stock = ? WHERE biere_id = ?";
+      "UPDATE bieres SET nom = ?, type = ?, prixHT = ?, degre = ?, IBU = ?, EBC = ?, descr = ?, artiste = ?, packable = ?, stock = ? WHERE biere_id = ?";
     const payload = [
       input.nom,
       input.type,
@@ -72,7 +82,8 @@ const bieresModel = function bieresModel(connection) {
   };
 
   return {
-    get,
+    getClassicBieres,
+    getSpecialsBieres,
     post,
     update,
     remove

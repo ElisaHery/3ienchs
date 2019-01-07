@@ -11,17 +11,17 @@ import "./Navbar.scss";
 
 const mapStateToProps = state => {
   return {
-    filters: {
-      connectedUser: state.connectedUser,
-      userPrenom: state.userPrenom
-    }
+    connectedUser: state.connectedUser,
+    userPrenom: state.userPrenom,
+    articlesPanier: state.articlesPanier
   };
 };
 
 class HeaderClass extends Component {
   render() {
-    const userPrenom = this.props.filters.userPrenom;
-    const connectedUser = this.props.filters.connectedUser;
+    const userPrenom = this.props.userPrenom;
+    const connectedUser = this.props.connectedUser;
+    console.log(this.props.articlesPanier);
 
     return (
       <nav className="navigation">
@@ -59,7 +59,7 @@ class HeaderClass extends Component {
               <Link to="/login">
                 <img
                   src={connexion_icon}
-                  className="right_icons"
+                  className="userIcon"
                   alt="connexion_icon"
                 />{" "}
               </Link>
@@ -78,11 +78,16 @@ class HeaderClass extends Component {
             )}
             <li className="li_right">
               <Link to="/panier">
-                <img src={basket} className="right_icons" alt="panier_icon" />{" "}
+                <img src={basket} className="basketIcon" alt="panier_icon" />{" "}
               </Link>
             </li>
           </ul>
         </div>
+        {this.props.articlesPanier.length > 0 ? (
+          <div className="articlesQty">{this.props.articlesPanier.length}</div>
+        ) : (
+          <div className="articlesQty" style={{ visibility: "hidden" }} />
+        )}
       </nav>
     );
   }

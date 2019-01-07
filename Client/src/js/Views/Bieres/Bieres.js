@@ -11,16 +11,23 @@ import "./Bieres.scss";
 
 class Bieres extends Component {
   state = {
-    response: []
+    classicBieres: [],
+    specialsBieres: []
   };
 
   componentDidMount() {
-    this.callApi(PathToBack + "bieres")
+    this.callApi(PathToBack + "classicbieres")
       .then(res => {
         // console.log(res);
-        this.setState({ response: res });
+        this.setState({ classicBieres: res });
       })
-      // .then(console.log(this.state.response))
+      .catch(err => console.log(err));
+
+    this.callApi(PathToBack + "specialsbieres")
+      .then(res => {
+        // console.log(res);
+        this.setState({ specialsbieres: res });
+      })
       .catch(err => console.log(err));
   }
 
@@ -33,7 +40,7 @@ class Bieres extends Component {
   };
 
   render() {
-    if (this.state.response.length === 0) return null;
+    if (this.state.classicBieres.length === 0) return null;
     // console.log(this.state.response);
     return (
       <Fragment>
@@ -51,24 +58,29 @@ class Bieres extends Component {
             </h2>
           </div>
           <section id="bieresSecondPart">
-            {this.state.response.map(e => (
-              <BiereIndiv
-                name={e.biere_nom}
-                srcImage={e.biere_img}
-                key={e.biere_id}
-                type={e.biere_type}
-                descr={e.biere_descr}
-              />
-            ))}
+            <h2 className="title-bieres">LES CLASSIQUES</h2>
+
+            <div className="bieres_classiques">
+              {this.state.classicBieres.map(e => (
+                <BiereIndiv
+                  name={e.nom}
+                  srcImage={e.img}
+                  key={e.biere_id}
+                  type={e.type}
+                  descr={e.descr}
+                  degre={e.degre}
+                  IBU={e.IBU}
+                  EBC={e.EBC}
+                />
+              ))}
+            </div>
           </section>
           <section id="bieresTarifs">
             <h1>TARIFS</h1>
             <p className="pTarifs">Bière à l'unité : 3€</p>
-            <p className="pTarifs">Pack de 6 : 15€</p>
-            <p className="pTarifs">Pack de 24 : 55,20€</p>
-            <p className="pVariete">
-              Un pack peut être composé de plusieurs variétés!{" "}
-            </p>
+            <p className="pTarifs">6 bières : 15€</p>
+            <p className="pTarifs">24 bières: 55,20€</p>
+            <p className="pVariete">Vous pouvez composer votre commande! </p>
           </section>
         </section>
         <SocialMedias />

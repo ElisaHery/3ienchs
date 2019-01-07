@@ -6,25 +6,31 @@ const bieresApi = function bieresApi(connection) {
   const router = require("express").Router();
   const bieresModel = require("./../Model/bieres")(connection);
 
+  router.get("/classicbieres/:id", (req, res) => {
+    bieresModel.getClassicBieres((err, dataset) => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send(dataset);
+    }, req.params.id);
+  });
+
+  router.get("/classicbieres", (req, res) => {
+    bieresModel.getClassicBieres((err, dataset) => {
+      res.send(dataset);
+    }, null);
+  });
+
+  router.get("/specialsbieres", (req, res) => {
+    bieresModel.getSpecialsBieres((err, dataset) => {
+      res.send(dataset);
+    }, null);
+  });
+
   router.post("/biere", (req, res) => {
     bieresModel.post((err, dataset) => {
       console.log(dataset);
       if (err) return res.status(500).send(err);
       return res.status(200).send(dataset);
     }, req.body);
-  });
-
-  router.get("/biere/:id", (req, res) => {
-    bieresModel.get((err, dataset) => {
-      if (err) return res.status(500).send(err);
-      return res.status(200).send(dataset);
-    }, req.params.id);
-  });
-
-  router.get("/bieres", (req, res) => {
-    bieresModel.get((err, dataset) => {
-      res.send(dataset);
-    }, null);
   });
 
   router.patch("/biere", (req, res) => {

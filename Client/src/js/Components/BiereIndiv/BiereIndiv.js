@@ -18,21 +18,20 @@ const mapStateToProps = state => {
 };
 
 class BiereIndivClass extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { typeBiere: this.props.name, value: 0 };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state = { typeBiere: this.props.name, quantity: 0 };
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    // console.log(event.target.value);
+    this.setState({ quantity: +event.target.value });
   }
 
   handleClick(event) {
     const articlesPanier = this.state;
+    // console.log(articlesPanier);
     // console.log(this.state.value);
-    this.props.AddPanier(articlesPanier);
+    if (articlesPanier.quantity > 0) {
+      this.props.AddPanier(articlesPanier);
+    }
   }
 
   render() {
@@ -48,17 +47,43 @@ class BiereIndivClass extends Component {
                   <img src={this.props.srcImage} alt={this.props.name} />
                 </figure>
               </div>
-              <div className="arr">
-                <p>{this.props.descr}</p>
+              <div
+                className="arr"
+                // style={{
+                //   backgroundImage: `url(${this.props.srcImage})`,
+                //   filter: "grayscale(100%)",
+
+                //   backgroundSize: "cover"
+                // }}
+              >
+                <p>
+                  {this.props.descr} <br />
+                  <br />
+                  {this.props.degre} %Alc <br />
+                  <br />
+                  {this.props.IBU} IBU • {this.props.EBC} EBC
+                </p>
               </div>
             </div>
           </article>
 
-          <h1>{this.props.name}</h1>
-          <h2>{this.props.type}</h2>
+          <h2>{this.props.name}</h2>
+          <h3>{this.props.type}</h3>
 
-          <input type="number" onChange={this.handleChange} />
-          <button onClick={this.handleClick}>ajouter au panier</button>
+          <div className="descr_responsive_container">
+            <p className="descr_responsive">{this.props.descr}</p>
+            <p className="descr_responsive">{this.props.degre} %Alc</p>
+            <p className="descr_responsive">
+              {" "}
+              {this.props.IBU} IBU • {this.props.EBC} EBC
+            </p>
+          </div>
+          <div className="input_container">
+            <input type="number" min="0" onChange={e => this.handleChange(e)} />
+            <button className="add_button" onClick={e => this.handleClick(e)}>
+              Ajouter au panier
+            </button>
+          </div>
         </div>
       </Fragment>
     );

@@ -1,6 +1,10 @@
 module.exports = (function myAuthLib() {
   "use strict";
 
+  const crypto = require("crypto");
+  const jwt = require("jsonwebtoken");
+  const secret = "@2018/_Elisa.3ienchs.JKcziéçà0,%*--@/@";
+
   /**
    * @function
    * @module authenticate a middleware to use in express routes
@@ -72,6 +76,39 @@ module.exports = (function myAuthLib() {
     }
 
     return filteredUser;
+  };
+
+  /**
+   * generates random string of characters i.e salt
+   * @function
+   * @tutorial https://ciphertrick.com/2016/01/18/salt-hash-passwords-using-nodejs-crypto/
+   * @param {Number} length - Length of the random string.
+   */
+  const genRandomString = function genRandomString(length) {
+    return crypto
+      .randomBytes(Math.ceil(length / 2))
+      .toString("hex") /** convert to hexadecimal format */
+      .slice(0, length); /** return required number of characters */
+  };
+
+  /**
+   * hash password with sha512.
+   * @function
+   * @param {string} password - List of required fields.
+   * @tutorial https://ciphertrick.com/2016/01/18/salt-hash-passwords-using-nodejs-crypto/
+   * @param {string} salt - Data to be validated.
+   */
+  const sha512 = function(password, salt) {
+    var hash = crypto.createHmac(
+      "sha512",
+      salt
+    ); /** Hashing algorithm sha512 */
+    hash.update(password);
+    var value = hash.digest("hex");
+    return {
+      salt: salt,
+      passwordHash: value
+    };
   };
 
   return {

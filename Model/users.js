@@ -3,15 +3,21 @@
 // @root/model/country.js
 
 const usersModel = function usersModel(connection) {
-  const get = function getUsers(clbk, id) {
-    console.log(id);
-    let q;
-    if (id) {
-      q = "SELECT * FROM users WHERE user_id = ?";
-    } else {
-      q = "SELECT * FROM users";
-    }
+  const get = function getUser(clbk, id) {
+    // console.log(id);
+    let q = "SELECT * FROM users WHERE user_id = ?";
     connection.query(q, [id], function(err, data, fields) {
+      // console.log(this.sql);
+      // console.log(data);
+      if (err) return clbk(err, null);
+      else return clbk(null, data);
+    });
+  };
+
+  const getAll = function getUsers(clbk) {
+    // console.log(id);
+    let q = "SELECT * FROM users";
+    connection.query(q, function(err, data, fields) {
       // console.log(this.sql);
       // console.log(data);
       if (err) return clbk(err, null);

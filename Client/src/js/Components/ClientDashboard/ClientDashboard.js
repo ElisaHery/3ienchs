@@ -5,6 +5,8 @@ import { ConnectedUser, LogoutUser } from "./../../actions";
 import PathToBack from "../../PathToBack";
 import "./ClientDashboard.scss";
 
+let userID, userNom, userPrenom, userMail;
+
 const mapDispatchToProps = dispatch => {
   return {
     ConnectedUser: user => dispatch(ConnectedUser(user)),
@@ -24,6 +26,7 @@ const mapStateToProps = state => {
 
 class ClientDashboardClass extends Component {
   state = {
+    user: "",
     showCommandes: true,
     showAccount: false,
     currentCommandes: [],
@@ -39,11 +42,11 @@ class ClientDashboardClass extends Component {
   };
 
   componentDidMount() {
-    const userID = this.props.userID;
+    // const userID = this.props.userID;
     // commandes en cours
     this.callApi(`${PathToBack}current_commandes_user/${userID}`)
       .then(res => {
-        console.log("commandes en cours ==>", res);
+        // console.log("commandes en cours ==>", res);
         this.setState({ currentCommandes: res });
       })
       .catch(err => console.log(err));
@@ -51,7 +54,7 @@ class ClientDashboardClass extends Component {
     // commandes passées
     this.callApi(`${PathToBack}old_commandes_user/${userID}`)
       .then(res => {
-        console.log("commandes passées ==>", res);
+        // console.log("commandes passées ==>", res);
         this.setState({ passedCommandes: res });
       })
       .catch(err => console.log(err));
@@ -78,15 +81,41 @@ class ClientDashboardClass extends Component {
     }
   }
 
+  sendInLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
   logOut(e) {
+    // this.props.ConnectedUser(false);
+    // this.props.LogoutUser("user");
+    //ajouter une modale "être vous sur de vouloir vous deconnecter"
+    //enlève les infos du local storage
+    localStorage.clear();
+    // this.sendInLocalStorage("connectedUser", false);
+    // en même temps on envoie au store redux l'information que l'user est d&connecté, pour provoquer un re-render
     this.props.ConnectedUser(false);
-    window.location = "/";
   }
 
   render() {
-    const userNom = this.props.userNom;
-    const userPrenom = this.props.userPrenom;
-    const userMail = this.props.userMail;
+    // const userNom = this.props.userNom;
+    // const userPrenom = this.props.userPrenom;
+    // const userMail = this.props.userMail;
+
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    if (user) {
+      userPrenom = user.user_prenom;
+      userNom = user.user_nom;
+      userMail = user.user_mail;
+      userID = user.user_id;
+      // console.log(userPrenom, userNom, userMail, userID);
+    }
+
+    const token = JSON.parse(localStorage.getItem("token") || "null");
+    console.log(token);
+    if (!token) {
+      return <p> Votre connexion n'est pas sécurisée</p>;
+    }
+
     return (
       <Fragment>
         <section className="dashboardContainer">
@@ -122,7 +151,7 @@ class ClientDashboardClass extends Component {
                           <th>{e.cmd_id}</th>
                           <th>{e.cmd_date}</th>
                           <th>{e.det_qte_produit}</th>
-                          <th>{e.biere_nom}</th>
+                          <th>{e.nom}</th>
                         </tr>
                       ))}
                     </tbody>
@@ -148,7 +177,7 @@ class ClientDashboardClass extends Component {
                           <th>{e.cmd_id}</th>
                           <th>{e.cmd_date}</th>
                           <th>{e.det_qte_produit}</th>
-                          <th>{e.biere_nom}</th>
+                          <th>{e.nom}</th>
                           <th>{e.cmd_dateheure_recup}</th>
                         </tr>
                       ))}

@@ -16,10 +16,15 @@ const usersApi = function usersApi(connection) {
     }, req.params.id);
   });
 
-  router.get("/users", (req, res) => {
-    usersModel.get((err, dataset) => {
-      res.send(dataset);
-    }, null);
+  router.get("/users", auth.authenticate, (req, res) => {
+    usersModel.getAll((err, users) => {
+      if (err) return res.status(520).send(err);
+      res.status(200).send(
+        users.map(user => {
+          return auth.removeSensitiveInfo(user);
+        })
+      );
+    });
   });
 
   //CONNEXION : VERIF ADRESSE MAIL ET MOT DE PASSE
@@ -48,14 +53,11 @@ const usersApi = function usersApi(connection) {
           // accompagné d'un token dans l'entête HTTP pour sécuriser l'accès au dashboard.
 
           user = auth.removeSensitiveInfo(user);
-          // const token = auth.createToken(user, req.ip);
-          return (
-            res
-              // .header("x-authenticate", token)
-              .status(200)
-              // .send({ user, token })
-              .send(user)
-          );
+          const token = auth.createToken(user, req.ip);
+          return res
+            .header("x-authenticate", token)
+            .status(200)
+            .send({ user, token });
         })
         .catch(err => {
           console.log("@catch", err);

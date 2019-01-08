@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { AddPanier } from "./../../actions";
 
 import Header from "../../Components/Header/Header.js";
-import Contact from "../../Views/Contact/Contact.js";
+import Footer from "../../Components/Footer/Footer.js";
 
 import "./Panier.scss";
 
@@ -36,13 +36,39 @@ class PanierClass extends Component {
           <section className="mainPanier">
             <div className="leftPanier">
               <h2>Produits</h2>
+
               <div className="ligne_rose" />
+
+              {this.props.articlesPanier.length === 0 ? (
+                <p>
+                  Vous n'avez rien dans votre panier. Découvrez nos produits{" "}
+                  <Link to="/bieres">ici ! </Link>{" "}
+                </p>
+              ) : (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Produit</th>
+                      <th>Quantité</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.props.articlesPanier.map(article => (
+                      <tr key={article.typeBiere}>
+                        <td>{article.typeBiere}</td>
+                        <td>{article.quantity}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </div>
             <div className="rightPanier">
               <h2>Récapitulatif</h2>
               <div className="ligne_blanche" />
             </div>
           </section>
+          <Footer />
         </div>
       </Fragment>
     );

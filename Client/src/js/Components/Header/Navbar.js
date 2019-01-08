@@ -19,8 +19,23 @@ const mapStateToProps = state => {
 
 class HeaderClass extends Component {
   render() {
-    const userPrenom = this.props.userPrenom;
-    const connectedUser = this.props.connectedUser;
+    // const userPrenom = this.props.userPrenom;
+    // const connectedUser = this.props.connectedUser;
+
+    // const userPrenom = JSON.parse(localStorage.getItem("user"));
+    let userPrenom;
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    if (user) {
+      userPrenom = user.user_prenom;
+    }
+
+    const connectedUser = JSON.parse(
+      localStorage.getItem("connectedUser") || this.props.connectedUser
+    );
+
+    console.log("user connecté ?", connectedUser);
+    console.log("son prénom ==>", userPrenom);
+
     console.log(this.props.articlesPanier);
     // Calcule le nombre total de bières dans le panier
     let totalQty = 0;

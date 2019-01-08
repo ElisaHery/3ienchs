@@ -39,16 +39,16 @@ const rootReducer = (state = initialState, action) => {
     // return { ...state, articles: [...state.articles, action.payload] }; --> on ajoute la valeur aux valeurs déjà existantes
 
     case "CONNECTED_USER":
-      //return { ...state, filter_price: [action.payload] };
+      console.log("state avant clic ==>", state.connectedUser);
       console.log("reçu du login ==>", action.payload);
-      // return {
       return {
         ...state,
-        userPrenom: action.payload.user_prenom,
-        userNom: action.payload.user_nom,
-        userID: action.payload.user_id,
-        userMail: action.payload.user_mail,
-        connectedUser: true
+        // userPrenom: action.payload[0].user_prenom,
+        // userNom: action.payload[0].user_nom,
+        // userID: action.payload[0].user_id,
+        // userMail: action.payload[0].user_mail,
+        // connectedUser: action.payload[1]
+        connectedUser: action.payload
       };
 
     case "LOGOUT_USER":

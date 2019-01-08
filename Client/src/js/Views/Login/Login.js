@@ -56,8 +56,12 @@ class LoginClass extends Component {
 
   //capte le contenu des inputs
   handleChange(evt) {
-    console.log(evt.target.value);
+    // console.log(evt.target.value);
     this.setState({ [evt.target.name]: evt.target.value });
+  }
+
+  sendInLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   //permet le login user, envoie la demande à l'API, et une fois une réponse positive obtenue
@@ -80,15 +84,20 @@ class LoginClass extends Component {
       // console.log(data);
       this.callApi(`${PathToBack}user/login`, fetch_param)
         .then(response => {
-          // console.log(response[0].user_nom);
           console.log(response);
-          this.props.ConnectedUser(response);
+          //on stocke dans le local storage les infos sur l'user
+          this.sendInLocalStorage("user", response.user);
+          this.sendInLocalStorage("connectedUser", true);
+          this.sendInLocalStorage("token", response.token);
+          // en même temps on envoie au store redux l'information que l'user est connecté, pour provoquer un re-render
+          this.props.ConnectedUser(true);
           this.setState({ nouvelInscrit: false });
         })
         .catch(err => {
           console.log(err);
           this.setState({ error: true, errorMessage: err.message });
         });
+      this.forceUpdate();
     }
   }
   //envoie les informations pour une inscription user. une fois celle-ci effectuée, active le message de bienvenue
@@ -133,7 +142,7 @@ class LoginClass extends Component {
   }
 
   render() {
-    const connectedUser = this.props.connectedUser;
+    const connectedUser = JSON.parse(localStorage.getItem("connectedUser"));
     return (
       <Fragment>
         <Header />

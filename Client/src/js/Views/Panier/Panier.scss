@@ -28,30 +28,74 @@
     justify-content: center;
     width: 100%;
     .leftPanier {
-      height: 300px;
+      height: auto;
+      min-height: 500px;
       width: 40%;
 
       h2 {
         color: #ff0066;
+        font-weight: lighter;
+        margin: 10px 0px 7px 0px;
       }
 
       .ligne_rose {
         background: #ff0066;
         height: 1px;
+        margin-bottom: 15px;
         width: 80%;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 20px 0px 40px 0px;
+        min-width: 80%;
+
+        thead {
+          tr {
+            th {
+              background-color: #ff0066;
+              color: white;
+
+              &:first-child {
+                width: 80%;
+              }
+            }
+          }
+        }
+
+        // tbody {
+        //   tr {
+        //     td {
+
+        //     }
+        //   }
+        // }
+
+        td,
+        th {
+          border: 1px solid #ddd;
+          padding: 12px;
+          font-family: "roadgeek_2005_engschriftRg";
+          font-weight: 300;
+          text-align: left;
+        }
+
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
       }
     }
     .rightPanier {
       background: #ff0066;
       border-radius: 3px;
-      height: 300px;
+      height: auto;
+      min-height: 400px;
       width: 20%;
 
       h2 {
         color: white;
         font-size: 1.3em;
         font-weight: lighter;
-        margin: 7px 7px 7px 5px;
+        margin: 10px 10px 10px 10px;
       }
       .ligne_blanche {
         background: white;

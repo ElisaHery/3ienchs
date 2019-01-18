@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { AddPanier } from "./../../actions";
+import { AddPanier, DeleteFromPanier } from "./../../actions";
 
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer.js";
@@ -12,7 +12,8 @@ import { get } from "https";
 
 const mapDispatchToProps = dispatch => {
   return {
-    AddPanier: (product, bool) => dispatch(AddPanier(product, bool))
+    AddPanier: (product, bool) => dispatch(AddPanier(product, bool)),
+    DeleteFromPanier: product => dispatch(DeleteFromPanier(product))
   };
 };
 
@@ -39,12 +40,16 @@ class PanierClass extends Component {
 
   handleUpdateFormQty(event, biere) {
     event.preventDefault();
-
-    const changePanier = {
+    const newPanier = {
       typeBiere: biere,
       quantity: +event.target.children[0].value
     };
-    this.props.AddPanier(changePanier, true);
+    this.props.AddPanier(newPanier, true);
+  }
+
+  handleDelete(e, productToDelete) {
+    console.log("yo");
+    this.props.DeleteFromPanier(productToDelete);
   }
 
   render() {
@@ -80,7 +85,15 @@ class PanierClass extends Component {
                   <tbody>
                     {this.props.articlesPanier.map(article => (
                       <tr key={article.typeBiere}>
-                        <td>{article.typeBiere}</td>
+                        <td>
+                          {article.typeBiere}{" "}
+                          <i
+                            className="far fa-trash-alt"
+                            onClick={e =>
+                              this.handleDelete(e, article.typeBiere)
+                            }
+                          />{" "}
+                        </td>
                         <td>
                           {" "}
                           <select
@@ -119,7 +132,6 @@ class PanierClass extends Component {
                               className="isHidden"
                               name={article.typeBiere}
                             />
-                            <i class="far fa-trash-alt" />{" "}
                           </form>
                         </td>
                       </tr>
@@ -132,7 +144,7 @@ class PanierClass extends Component {
               <h2>Récapitulatif</h2>
               <div className="ligne_blanche" />
               {this.props.articlesPanier.map(article => (
-                <div>
+                <div key={article.typeBiere}>
                   <div>
                     <p>
                       {article.quantity} x {article.typeBiere}

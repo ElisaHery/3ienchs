@@ -8,6 +8,11 @@ export const AddPanier = (articlesToAdd, boolean) => ({
   replaceInPanier: boolean
 });
 
+export const DeleteFromPanier = articlesToDelete => ({
+  type: "DELETE_FROM_PANIER",
+  payload: articlesToDelete
+});
+
 export const ConnectedUser = connectedUser => ({
   type: "CONNECTED_USER",
   payload: connectedUser

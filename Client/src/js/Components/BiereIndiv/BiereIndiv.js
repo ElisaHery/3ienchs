@@ -18,7 +18,12 @@ const mapStateToProps = state => {
 };
 
 class BiereIndivClass extends Component {
-  state = { typeBiere: this.props.name, quantity: 0 };
+  state = {
+    typeBiere: this.props.name,
+    quantity: 0,
+    price: this.props.price,
+    packable: this.props.packableStatus
+  };
 
   handleChange(event) {
     // console.log(event.target.value);

@@ -11,6 +11,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PANIER":
+      console.log("bière panier ==>", action.payload);
       //vérifie si cette bière est déjà dans le panier ou non.
       let biereAlreadyinPanierIndex = state.articlesPanier
         .map(function(e) {
@@ -42,6 +43,28 @@ const rootReducer = (state = initialState, action) => {
         articlesPanier
       };
     // return { ...state, articles: [...state.articles, action.payload] }; --> on ajoute la valeur aux valeurs déjà existantes
+
+    case "DELETE_FROM_PANIER":
+      console.log("bière à supprimer ==>", action.payload);
+      console.log("state avant clic ==>", state.articlesPanier);
+
+      //renvoie l'index de la bière à supprimer
+      let biereIndex = state.articlesPanier
+        .map(function(e) {
+          return e.typeBiere;
+        })
+        .indexOf(action.payload);
+
+      console.log("index de la bière à supp ==>", biereIndex);
+
+      let panier = state.articlesPanier.slice();
+      panier.splice(biereIndex, 1);
+      console.log("nouveau state ==>", panier);
+
+      return {
+        ...state,
+        articlesPanier: panier
+      };
 
     case "CONNECTED_USER":
       console.log("state avant clic ==>", state.connectedUser);

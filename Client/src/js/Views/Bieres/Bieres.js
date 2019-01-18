@@ -70,6 +70,8 @@ class Bieres extends Component {
                   degre={e.degre}
                   IBU={e.IBU}
                   EBC={e.EBC}
+                  price={e.prixHT}
+                  packableStatus={e.packable}
                 />
               ))}
             </div>
@@ -88,6 +90,8 @@ class Bieres extends Component {
                     degre={e.degre}
                     IBU={e.IBU}
                     EBC={e.EBC}
+                    price={e.prixHT}
+                    packableStatus={e.packable}
                   />
                 ))
               )}

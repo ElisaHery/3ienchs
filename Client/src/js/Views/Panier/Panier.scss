@@ -76,6 +76,17 @@
             margin: 0 3px 0 3px;
             width: 30%;
           }
+          i {
+            cursor: pointer;
+            padding-left: 4%;
+          }
+        }
+
+        td {
+          &:last-child {
+            display: flex;
+            align-items: center;
+          }
         }
 
         tr:nth-child(even) {
@@ -99,6 +110,7 @@
       .ligne_blanche {
         background: white;
         height: 1px;
+        margin-bottom: 12%;
         width: 100%;
       }
 
@@ -106,10 +118,13 @@
         div {
           display: flex;
           justify-content: space-between;
+          width: 80%;
+          margin: auto;
 
-          span {
+          p {
             color: white;
             font-family: "roadgeek_2005_engschriftRg";
+            padding: 3%;
           }
         }
 

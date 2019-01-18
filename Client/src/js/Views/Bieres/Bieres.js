@@ -25,7 +25,7 @@ class Bieres extends Component {
 
     this.callApi(PathToBack + "specialsbieres")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({ specialsBieres: res });
       })
       .catch(err => console.log(err));
@@ -76,7 +76,7 @@ class Bieres extends Component {
             <h2 className="title-bieres">LES SPECIALES</h2>
             <div className="bieres_vignettes">
               {this.state.specialsBieres.length === 0 ? (
-                <p>Pas de bière spéciale</p>
+                <p>Pas de bières spéciales pour le moment!</p>
               ) : (
                 this.state.specialsBieres.map(e => (
                   <BiereIndiv

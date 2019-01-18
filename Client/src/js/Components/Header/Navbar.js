@@ -104,7 +104,9 @@ class HeaderClass extends Component {
           </ul>
         </div>
         {this.props.articlesPanier.length > 0 ? (
-          <div className="articlesQty">{totalQty}</div>
+          <Link to="/panier">
+            <div className="articlesQty">{totalQty}</div>
+          </Link>
         ) : (
           <div className="articlesQty" style={{ visibility: "hidden" }} />
         )}

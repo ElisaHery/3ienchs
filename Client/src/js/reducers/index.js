@@ -11,24 +11,29 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PANIER":
-      //vérifie q'il existe déjà de cette bière dans le panier. Si oui, on ajoute les quantités, sinon on push un nouvel
-      //objet dans le tableau.
-
+      //vérifie si cette bière est déjà dans le panier ou non.
       let biereAlreadyinPanierIndex = state.articlesPanier
         .map(function(e) {
           return e.typeBiere;
         })
         .indexOf(action.payload.typeBiere);
 
-      // make a copy of the existing array
+      // fais une copie du panier existant
       let articlesPanier = state.articlesPanier.slice();
 
-      if (biereAlreadyinPanierIndex > -1) {
-        articlesPanier[biereAlreadyinPanierIndex].quantity =
-          +articlesPanier[biereAlreadyinPanierIndex].quantity +
-          +action.payload.quantity;
+      //si on a placé "true" en 2ème argument, on va remplacer la quantité dans le panier (page "panier")
+      if (action.replaceInPanier) {
+        articlesPanier[biereAlreadyinPanierIndex].quantity = +action.payload
+          .quantity;
       } else {
-        articlesPanier.push(action.payload);
+        //sinon on va ajouter à la quantité déjà existante (page "nos bières")
+        if (biereAlreadyinPanierIndex > -1) {
+          articlesPanier[biereAlreadyinPanierIndex].quantity =
+            +articlesPanier[biereAlreadyinPanierIndex].quantity +
+            +action.payload.quantity;
+        } else {
+          articlesPanier.push(action.payload);
+        }
       }
 
       return {

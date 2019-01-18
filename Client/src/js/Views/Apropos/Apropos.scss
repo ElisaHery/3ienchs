@@ -1,8 +1,78 @@
-.AproposPageWrap {
+#AproposPageWrap {
   background: white;
   height: auto;
-  padding-top: 50px;
+  // padding-top: 50px;
   position: relative;
   top: 55px;
   width: 100%;
+
+  #AproposFirstPart {
+    // background-image: url("https://elisahery.com/images3ienchs/serveur.jpg");
+    background-image: url("./../../../assets/images/serveur.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    p {
+      &:first-child {
+        color: white;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.3em;
+        font-weight: lighter;
+        margin: 0 auto 0 auto;
+        padding-top: 20px;
+        max-width: 80%;
+
+        text-align: center;
+      }
+    }
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 3.5em;
+      font-weight: lighter;
+      margin-bottom: 30px;
+      margin-top: 200px;
+    }
+
+    h2 {
+      color: white;
+      font-size: 1.5em;
+      font-weight: lighter;
+      text-align: center;
+    }
+  }
+
+  #AproposSecondPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .presentation {
+      font-size: 1.2em;
+      line-height: 1.5em;
+      // margin: auto;
+      padding: 5% 0 3% 0;
+      text-align: center;
+      width: 50%;
+    }
+
+    figure {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+
+    h2 {
+      padding-top: 3%;
+    }
+
+    .presentation_suite {
+      font-size: 1.2em;
+      line-height: 1.5em;
+      // margin: auto;
+      padding: 2% 0 3% 0;
+      text-align: center;
+      width: 50%;
+    }
+  }
 }

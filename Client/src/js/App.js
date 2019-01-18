@@ -8,6 +8,7 @@ import Panier from "./Views/Panier/Panier.js";
 import Login from "./Views/Login/Login.js";
 import Contact from "./Views/Contact/Contact.js";
 import Legal from "./Views/Legal/Legal.js";
+import Vente from "./Views/Pointsvente/Vente.js";
 
 import "./App.css";
 
@@ -20,7 +21,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/bieres" component={Bieres} />
             <Route path="/apropos" component={Apropos} />
-            <Route path="/vente" component={Apropos} />
+            <Route path="/vente" component={Vente} />
             <Route path="/panier" component={Panier} />
             <Route path="/login" component={Login} />
             <Route path="/contact" component={Contact} />

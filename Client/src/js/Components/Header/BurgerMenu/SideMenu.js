@@ -28,7 +28,7 @@ const SideMenu = props => {
           <Link to="/login">Connexion</Link>
         </li>
         <li className="li_left">
-          <Link to="/">Panier</Link>
+          <Link to="/panier">Panier</Link>
         </li>
       </ul>
     </nav>

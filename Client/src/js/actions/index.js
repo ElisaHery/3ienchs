@@ -1,9 +1,11 @@
 // src/js/actions/index.js
 // import { ADD_ARTICLE } from "../constants/action-types";
 
-export const AddPanier = articlesToAdd => ({
+export const AddPanier = (articlesToAdd, boolean) => ({
   type: "ADD_PANIER",
-  payload: articlesToAdd
+  payload: articlesToAdd,
+  //lorsque l'on veut remplacer la quantité dans le panier, et non ajouter
+  replaceInPanier: boolean
 });
 
 export const ConnectedUser = connectedUser => ({

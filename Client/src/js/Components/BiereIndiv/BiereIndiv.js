@@ -21,7 +21,7 @@ class BiereIndivClass extends Component {
   state = {
     typeBiere: this.props.name,
     quantity: 0,
-    price: this.props.price,
+    unitePrice: this.props.price,
     packable: this.props.packableStatus
   };
 

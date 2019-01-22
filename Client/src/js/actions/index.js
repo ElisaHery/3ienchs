@@ -8,6 +8,11 @@ export const AddPanier = (articlesToAdd, boolean) => ({
   replaceInPanier: boolean
 });
 
+export const AddPricePanier = CalculatedPrice => ({
+  type: "ADD_PRICE_PANIER",
+  payload: CalculatedPrice
+});
+
 export const DeleteFromPanier = articlesToDelete => ({
   type: "DELETE_FROM_PANIER",
   payload: articlesToDelete

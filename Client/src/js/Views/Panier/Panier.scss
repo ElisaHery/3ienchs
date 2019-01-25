@@ -131,14 +131,37 @@
           }
         }
 
+        .flex_col {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
         .ligne_blanche_courte {
           background: white;
           height: 1px;
           width: 80%;
         }
 
-        .total {
-          margin: 10% auto 2% auto;
+        .italique {
+          color: white;
+          font-style: italic;
+          font-weight: bold;
+          margin: 20% auto 10% auto;
+          width: 50%;
+        }
+
+        .validateButton {
+          background: white;
+          border-radius: 10px;
+          color: #ff0066;
+          cursor: pointer;
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1em;
+          height: 30px;
+          margin: 20% auto 10% auto;
+          width: 95px;
         }
       }
     }

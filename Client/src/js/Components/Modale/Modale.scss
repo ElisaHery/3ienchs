@@ -1,0 +1,17 @@
+.mask {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  .modale {
+    background: white;
+    border-radius: 10px;
+    height: 40%;
+    margin: 15% auto 0 auto;
+    width: 30%;
+  }
+}

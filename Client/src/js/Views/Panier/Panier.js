@@ -6,9 +6,13 @@ import { AddPanier, AddPricePanier, DeleteFromPanier } from "./../../actions";
 
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer.js";
+import Modale from "../../Components/Modale/Modale.js";
 
 import "./Panier.scss";
-import { get } from "https";
+
+const connectedUser = JSON.parse(
+  localStorage.getItem("connectedUser") || this.props.connectedUser
+);
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -20,14 +24,19 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    articlesPanier: state.articlesPanier
+    articlesPanier: state.articlesPanier,
+    connectedUser: state.connectedUser
   };
 };
 
 class PanierClass extends Component {
-  handleUpdateQty(event, biere) {
-    // console.log(event.target);
+  state = {
+    afficherConnexionMessage: false,
+    afficherModale: false
+  };
 
+  //met à jour la quantité avec le select
+  handleUpdateQty(event, biere) {
     if (isNaN(event.target.value)) {
       console.log(event.target);
       event.target.setAttribute("class", "isHidden");
@@ -36,9 +45,10 @@ class PanierClass extends Component {
     } else {
       const changePanier = { typeBiere: biere, quantity: +event.target.value };
       this.props.AddPanier(changePanier, true);
+      // this.updateTotalprice();
     }
   }
-
+  //met à jour la qté avec l'input
   handleUpdateFormQty(event, biere) {
     event.preventDefault();
     const newPanier = {
@@ -46,102 +56,30 @@ class PanierClass extends Component {
       quantity: +event.target.children[0].value
     };
     this.props.AddPanier(newPanier, true);
+    // this.updateTotalprice();
   }
 
   handleDelete(e, productToDelete) {
     console.log("yo");
     this.props.DeleteFromPanier(productToDelete);
+    // this.updateTotalprice();
   }
 
-  priceUnder6 = (number1, number2) => {
-    const prix = number1 * number2;
-    return prix.toFixed(2);
+  calculTotalPanier = () => {
+    let totalPanier = 0;
+    this.props.articlesPanier.forEach(element => {
+      totalPanier += element.totalPrice;
+    });
+    return +totalPanier.toFixed(2);
   };
 
-  isMultiple = (number1, number2) => {
-    var remainder = number1 % number2;
-    if (remainder == 0) {
-      //x is a multiple of y
+  handleValiderPanier = () => {
+    if (!connectedUser) {
+      this.setState({ afficherConnexionMessage: true });
     } else {
-      //x is not a multiple of y
-    }
-  };
-
-  //si le nombre de bière est un multiple de 6 ou 24 (les packs en promo) alors on multiple le nombre de pack par le prix du pack
-  priceWithoutModulo = (clientQty, packQty, packPrice) => {
-    const prix = (clientQty / packQty) * packPrice;
-    return prix.toFixed(2);
-  };
-
-  //on calcule le nombre de pack
-  priceWithModulo = (clientQty, packQty, packPrice, unitePrice) => {
-    const remainder = clientQty % packQty;
-    const prix =
-      ((clientQty - remainder) / packQty) * packPrice + remainder * unitePrice;
-    return prix.toFixed(2);
-  };
-
-  calculatePrice = (clientQty, unitePrice, packable, typeBiere) => {
-    const pack6Price = 15;
-    const pack24Price = 55.2;
-    // si moins de 6 bières, elles sont calculées à l'unité
-    if (clientQty < 6) {
-      const prix = (clientQty * unitePrice).toFixed(2);
-      this.props.AddPricePanier({ biere: typeBiere, totalPrice: +prix });
-      return prix;
-    } else {
-      // si plus de 6 bières, on détermine si elles sont packables ou non
-      if (packable === 1) {
-        //si on a entre 6 et 24 bières, on détermine si c'est un multiple de 6 ou non et on applique la fonction correspondante
-        if (clientQty < 24) {
-          if (clientQty % 6 === 0) {
-            return this.priceWithoutModulo(clientQty, 6, pack6Price);
-          } else {
-            return this.priceWithModulo(clientQty, 6, pack6Price, unitePrice);
-          }
-          // si on a plus de 24bières on fait la même chose avec les multiples de 24
-        } else {
-          //si multiple de 24
-          const remainderFrom24 = clientQty % 24;
-          const clientQtyLessremainder = clientQty - remainderFrom24;
-          if (remainderFrom24 === 0) {
-            return this.priceWithoutModulo(clientQty, 24, pack24Price);
-            // si pas multiple de 24 et que le reste est supérieur à 6 (= on doit appliquer les promo sur le reste)
-          } else if (remainderFrom24 > 5) {
-            if (remainderFrom24 % 6 === 0) {
-              const prix =
-                +this.priceWithoutModulo(
-                  clientQtyLessremainder,
-                  24,
-                  pack24Price
-                ) + +this.priceWithoutModulo(remainderFrom24, 6, pack6Price);
-              return prix.toFixed(2);
-            } else {
-              const prix =
-                +this.priceWithoutModulo(
-                  clientQtyLessremainder,
-                  24,
-                  pack24Price
-                ) +
-                +this.priceWithModulo(
-                  remainderFrom24,
-                  6,
-                  pack6Price,
-                  unitePrice
-                );
-
-              return prix.toFixed(2);
-            }
-            //si pas multiple de 24 et que le reste est inférieur à 6
-          } else {
-            return this.priceWithModulo(clientQty, 24, pack24Price, unitePrice);
-          }
-        }
-        // si elles ne sont pas packables c'est facile car les promos ne s'appliquent pas ==> on revient à un calcul à l'unité
-      } else {
-        const prix = clientQty * unitePrice;
-        return prix.toFixed(2);
-      }
+      this.setState({ afficherConnexionMessage: false });
+      this.setState({ afficherModale: true });
+      document.body.classList.add("noscroll-class");
     }
   };
 
@@ -244,28 +182,48 @@ class PanierClass extends Component {
                     </p>
 
                     <p>
-                      {this.calculatePrice(
+                      {/* {this.calculatePrice(
                         article.quantity,
                         article.unitePrice,
                         article.packable,
                         article.typeBiere
-                      )}
-                      €
+                      )} */}
+                      {article.totalPrice}€
                     </p>
                   </div>
                   <div className="ligne_blanche_courte" />
                 </div>
               ))}
 
-              {/* <div className="ligne_blanche_courte total" />
-              <div>
-                <p>total</p>
-                <p>total</p>
-              </div> */}
+              {this.calculTotalPanier() > 0 && (
+                <div>
+                  <div className="ligne_blanche_courte" />
+                  <div>
+                    <p>TOTAL </p>
+                    <p>{this.calculTotalPanier()}€</p>
+                  </div>{" "}
+                  <div className="flex_col">
+                    <p className="italique">
+                      Commande à emporter et à régler sur place
+                    </p>
+                    <button
+                      className="validateButton"
+                      onClick={e => this.handleValiderPanier(e)}
+                    >
+                      {" "}
+                      Commander{" "}
+                    </button>
+                    {this.state.afficherConnexionMessage && (
+                      <p>Vous devez vous connecter pour continuer!</p>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </section>
           <Footer />
         </div>
+        {this.state.afficherModale && <Modale />}
       </Fragment>
     );
   }

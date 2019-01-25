@@ -33,10 +33,10 @@ class HeaderClass extends Component {
       localStorage.getItem("connectedUser") || this.props.connectedUser
     );
 
-    console.log("user connecté ?", connectedUser);
-    console.log("son prénom ==>", userPrenom);
+    // console.log("user connecté ?", connectedUser);
+    // console.log("son prénom ==>", userPrenom);
 
-    console.log(this.props.articlesPanier);
+    // console.log(this.props.articlesPanier);
     // Calcule le nombre total de bières dans le panier
     let totalQty = 0;
     this.props.articlesPanier.forEach(element => {
@@ -103,12 +103,10 @@ class HeaderClass extends Component {
             </li>
           </ul>
         </div>
-        {this.props.articlesPanier.length > 0 ? (
+        {this.props.articlesPanier.length > 0 && (
           <Link to="/panier">
             <div className="articlesQty">{totalQty}</div>
           </Link>
-        ) : (
-          <div className="articlesQty" style={{ visibility: "hidden" }} />
         )}
       </nav>
     );

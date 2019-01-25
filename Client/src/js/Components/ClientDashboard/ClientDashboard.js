@@ -92,7 +92,7 @@ class ClientDashboardClass extends Component {
     //enlève les infos du local storage
     localStorage.clear();
     // this.sendInLocalStorage("connectedUser", false);
-    // en même temps on envoie au store redux l'information que l'user est d&connecté, pour provoquer un re-render
+    // en même temps on envoie au store redux l'information que l'user est déconnecté, pour provoquer un re-render
     this.props.ConnectedUser(false);
   }
 

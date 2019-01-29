@@ -115,7 +115,7 @@
       }
 
       div {
-        div {
+        div.flex_right_panier {
           display: flex;
           justify-content: space-between;
           width: 80%;
@@ -136,11 +136,21 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
+
+          p {
+            color: white;
+
+            a {
+              text-decoration: underline;
+              color: white;
+            }
+          }
         }
 
         .ligne_blanche_courte {
           background: white;
           height: 1px;
+          margin: auto;
           width: 80%;
         }
 

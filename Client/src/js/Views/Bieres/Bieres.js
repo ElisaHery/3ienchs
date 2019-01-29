@@ -65,6 +65,7 @@ class Bieres extends Component {
                   name={e.nom}
                   srcImage={e.img}
                   key={e.biere_id}
+                  id={e.biere_id}
                   type={e.type}
                   descr={e.descr}
                   degre={e.degre}
@@ -85,6 +86,7 @@ class Bieres extends Component {
                     name={e.nom}
                     srcImage={e.img}
                     key={e.biere_id}
+                    id={e.biere_id}
                     type={e.type}
                     descr={e.descr}
                     degre={e.degre}

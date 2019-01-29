@@ -2,20 +2,22 @@
 
 const initialState = {
   articlesPanier: [
-    {
-      typeBiere: "Big Daddy 33cl",
-      quantity: 3,
-      unitePrice: 3,
-      packable: 1,
-      totalPrice: 9
-    },
-    {
-      typeBiere: "Wawah 33cl",
-      quantity: 3,
-      unitePrice: 3,
-      packable: 1,
-      totalPrice: 9
-    }
+    // {
+    //   typeBiere: "Big Daddy 33cl",
+    //   quantity: 3,
+    //   id: 1,
+    //   unitePrice: 3,
+    //   packable: 1,
+    //   totalPrice: 9
+    // },
+    // {
+    //   typeBiere: "Wawah 33cl",
+    //   quantity: 3,
+    //   id: 2,
+    //   unitePrice: 3,
+    //   packable: 1,
+    //   totalPrice: 9
+    // }
   ],
   connectedUser: false,
   userPrenom: "",
@@ -95,7 +97,7 @@ const calculatePrice = (clientQty, unitePrice, packable) => {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PANIER":
-      console.log("bière  ==>", action.payload);
+      // console.log("bière  ==>", action.payload);
       //vérifie si cette bière est déjà dans le panier ou non.
       let biereAlreadyinPanierIndex = state.articlesPanier
         .map(function(e) {
@@ -136,7 +138,7 @@ const rootReducer = (state = initialState, action) => {
         }
       }
 
-      console.log(articlesPanier);
+      // console.log(articlesPanier);
       return {
         ...state,
         // articlesPanier: [...state.articlesPanier, action.payload]

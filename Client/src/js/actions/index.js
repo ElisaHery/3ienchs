@@ -28,6 +28,6 @@ export const ConnectedUser = connectedUser => ({
 });
 
 export const LogoutUser = el => ({
-  type: "CONNECTED_USER",
+  type: "LOGOUT_USER",
   payload: el
 });

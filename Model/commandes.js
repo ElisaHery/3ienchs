@@ -32,7 +32,7 @@ const commandesModel = function commandesModel(connection) {
   //USER : VOIR SON HISTORIQUE DE COMMANDES
   const getUserOldCommandes = function getUserOldCommandes(clbk, user_id) {
     const q =
-      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1";
+      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1 ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
       // console.log(this.sql);
       // console.log(data);
@@ -47,7 +47,7 @@ const commandesModel = function commandesModel(connection) {
     user_id
   ) {
     const q =
-      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 0";
+      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 0  ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
       console.log(this.sql);
       console.log(data);
@@ -57,18 +57,41 @@ const commandesModel = function commandesModel(connection) {
   };
 
   // USER : PASSER COMMANDE
-  const post = function createCommande(clbk, input) {
+
+  const createCommande = function createCommande(clbk, input) {
     const q =
-      "INSERT into commandes (cmd_id_user, cmd_date, cmd_dateheure_recup) VALUES (?, now(), ?)";
-    connection.query(q, [input.id_user, input.dateheure], function(
-      err,
-      results,
-      fields
-    ) {
-      console.log(this.sql);
-      if (err) return clbk(err, null);
-      else return clbk(null, results);
-    });
+      "INSERT into commandes (cmd_id_user, cmd_date, cmd_dateheure_recup, cmd_over) VALUES (?, now(), ?, ?)";
+    const q2 =
+      "INSERT into details_commande (det_id_comm, det_id_produit, det_qte_produit) VALUES (?, ?, ?)";
+    const query1 = connection.query(
+      q,
+      [input.id_user, input.dateheure, input.cmd_over],
+      function(err, resultsFromQ1, fields) {
+        if (err) return clbk(err, null);
+        //       console.log("resultats requete 1 --> ", resultsFromQ1);
+        else {
+          const tmp = [];
+          input.panier.forEach((element, i) => {
+            connection.query(
+              q2,
+              [resultsFromQ1.insertId, element.id, element.quantity],
+              function(err, dataFromQ2, fields) {
+                console.log("requete 2 --> ", this.sql);
+                //             console.log("resultats requete 2 --> ", dataFromQ2);
+                if (err) return clbk(err, null);
+                tmp.push(dataFromQ2);
+                if (i === input.panier.length - 1) {
+                  return clbk(null, tmp);
+                }
+              }
+            );
+          });
+
+          console.log("renvoie au front -->", tmp);
+        }
+      }
+    );
+    console.log("requete 1 --> ", query1.sql);
   };
 
   // USER : MODIFIER LA DATE DE RETRAIT DE SA COMMANDE - ADMIN : PASSER LA COMMANDE EN "OVER"
@@ -99,7 +122,7 @@ const commandesModel = function commandesModel(connection) {
     getUsersCommandes,
     getUserOldCommandes,
     getUserCurrentCommandes,
-    post,
+    post: createCommande,
     update,
     remove
   };

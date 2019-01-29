@@ -10,8 +10,30 @@
   .modale {
     background: white;
     border-radius: 10px;
-    height: 40%;
+    height: auto;
     margin: 15% auto 0 auto;
+    padding: 1% 0 2% 0;
     width: 30%;
+
+    p {
+      padding: 2%;
+      text-align: center;
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+
+      button {
+        background: #ff0066;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1em;
+        margin: 3px;
+        padding: 2px;
+      }
+    }
   }
 }

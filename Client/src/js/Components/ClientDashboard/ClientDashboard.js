@@ -87,13 +87,13 @@ class ClientDashboardClass extends Component {
 
   logOut(e) {
     // this.props.ConnectedUser(false);
-    // this.props.LogoutUser("user");
+    this.props.LogoutUser("user");
     //ajouter une modale "être vous sur de vouloir vous deconnecter"
     //enlève les infos du local storage
     localStorage.clear();
-    // this.sendInLocalStorage("connectedUser", false);
     // en même temps on envoie au store redux l'information que l'user est déconnecté, pour provoquer un re-render
-    this.props.ConnectedUser(false);
+    // this.props.ConnectedUser(false);
+    this.forceUpdate();
   }
 
   render() {
@@ -111,7 +111,7 @@ class ClientDashboardClass extends Component {
     }
 
     const token = JSON.parse(localStorage.getItem("token") || "null");
-    console.log(token);
+    // console.log(token);
     if (!token) {
       return <p> Votre connexion n'est pas sécurisée</p>;
     }

@@ -18,6 +18,7 @@ class Vente extends Component {
             src="https://www.google.com/maps/d/embed?mid=1xMoZxGUwH__zvvX64NaT7768-B0fCmkx"
             width="640"
             height="480"
+            title="maps points de vente"
           />
         </div>
         <SocialMedias />

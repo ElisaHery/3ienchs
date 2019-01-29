@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { connect } from "react-redux";
 import { AddPanier, AddPricePanier, DeleteFromPanier } from "./../../actions";
@@ -7,12 +9,11 @@ import { AddPanier, AddPricePanier, DeleteFromPanier } from "./../../actions";
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer.js";
 import Modale from "../../Components/Modale/Modale.js";
+import PathToBack from "../../PathToBack";
 
 import "./Panier.scss";
 
-const connectedUser = JSON.parse(
-  localStorage.getItem("connectedUser") || this.props.connectedUser
-);
+// let connectedUser;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -35,7 +36,14 @@ class PanierClass extends Component {
     afficherModale: false
   };
 
-  //met à jour la quantité avec le select
+  callApi = async (url, corps) => {
+    const response = await fetch(url, corps);
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
+  //met à jour la quantité avec le select (1 à 10 bières)
   handleUpdateQty(event, biere) {
     if (isNaN(event.target.value)) {
       console.log(event.target);
@@ -48,7 +56,7 @@ class PanierClass extends Component {
       // this.updateTotalprice();
     }
   }
-  //met à jour la qté avec l'input
+  //met à jour la qté avec l'input number (plus de10 bières)
   handleUpdateFormQty(event, biere) {
     event.preventDefault();
     const newPanier = {
@@ -59,12 +67,13 @@ class PanierClass extends Component {
     // this.updateTotalprice();
   }
 
+  //suppression d'un produit
   handleDelete(e, productToDelete) {
-    console.log("yo");
     this.props.DeleteFromPanier(productToDelete);
     // this.updateTotalprice();
   }
 
+  //calcule le total du panier
   calculTotalPanier = () => {
     let totalPanier = 0;
     this.props.articlesPanier.forEach(element => {
@@ -73,7 +82,12 @@ class PanierClass extends Component {
     return +totalPanier.toFixed(2);
   };
 
+  //gère le clic sur "commander"
   handleValiderPanier = () => {
+    // console.log(this.props.articlesPanier);
+    let connectedUser = JSON.parse(localStorage.getItem("connectedUser"));
+
+    // console.log(connectedUser);
     if (!connectedUser) {
       this.setState({ afficherConnexionMessage: true });
     } else {
@@ -81,6 +95,44 @@ class PanierClass extends Component {
       this.setState({ afficherModale: true });
       document.body.classList.add("noscroll-class");
     }
+  };
+
+  // gère la validation de la commande
+  validateCommande = () => {
+    document.body.classList.remove("noscroll-class");
+    let user = JSON.parse(localStorage.getItem("user"));
+    // console.log(user.user_id);
+    const data = {
+      id_user: user.user_id,
+      dateheure_recup: null,
+      cmd_over: 0,
+      panier: this.props.articlesPanier
+    };
+    // On poste dans commandes avec IDuser et date_heure_récup, et ensuite dans le fichier DB on récupère l'ID
+    // commandes et on poste les détails de la commande (qté et ID produit qu'on aura en faisant un join)
+    const fetch_param = {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data)
+    };
+    this.callApi(`${PathToBack}commande`, fetch_param)
+      .then(response => {
+        console.log(response);
+        this.props.history.push("/login");
+      })
+
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: true, errorMessage: err.message });
+      });
+    // this.forceUpdate();
+  };
+
+  // retour au panier
+  backToPanier = () => {
+    this.setState({ afficherConnexionMessage: false });
+    this.setState({ afficherModale: false });
+    document.body.classList.remove("noscroll-class");
   };
 
   render() {
@@ -176,20 +228,12 @@ class PanierClass extends Component {
               <div className="ligne_blanche" />
               {this.props.articlesPanier.map(article => (
                 <div key={article.typeBiere}>
-                  <div>
+                  <div className="flex_right_panier">
                     <p>
                       {article.quantity} x {article.typeBiere}
                     </p>
 
-                    <p>
-                      {/* {this.calculatePrice(
-                        article.quantity,
-                        article.unitePrice,
-                        article.packable,
-                        article.typeBiere
-                      )} */}
-                      {article.totalPrice}€
-                    </p>
+                    <p>{article.totalPrice}€</p>
                   </div>
                   <div className="ligne_blanche_courte" />
                 </div>
@@ -198,7 +242,7 @@ class PanierClass extends Component {
               {this.calculTotalPanier() > 0 && (
                 <div>
                   <div className="ligne_blanche_courte" />
-                  <div>
+                  <div className="flex_right_panier">
                     <p>TOTAL </p>
                     <p>{this.calculTotalPanier()}€</p>
                   </div>{" "}
@@ -206,6 +250,11 @@ class PanierClass extends Component {
                     <p className="italique">
                       Commande à emporter et à régler sur place
                     </p>
+
+                    <DatePicker
+                      selected={this.state.startDate}
+                      onChange={this.handleChange}
+                    />
                     <button
                       className="validateButton"
                       onClick={e => this.handleValiderPanier(e)}
@@ -214,7 +263,10 @@ class PanierClass extends Component {
                       Commander{" "}
                     </button>
                     {this.state.afficherConnexionMessage && (
-                      <p>Vous devez vous connecter pour continuer!</p>
+                      <p>
+                        Vous devez <Link to="/login">vous connecter</Link> pour
+                        continuer!
+                      </p>
                     )}
                   </div>
                 </div>
@@ -223,7 +275,12 @@ class PanierClass extends Component {
           </section>
           <Footer />
         </div>
-        {this.state.afficherModale && <Modale />}
+        {this.state.afficherModale && (
+          <Modale
+            validateCommande={e => this.validateCommande(e)}
+            backToPanier={e => this.backToPanier(e)}
+          />
+        )}
       </Fragment>
     );
   }

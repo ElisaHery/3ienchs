@@ -20,6 +20,7 @@ const mapStateToProps = state => {
 class BiereIndivClass extends Component {
   state = {
     typeBiere: this.props.name,
+    id: this.props.id,
     quantity: 0,
     unitePrice: this.props.price,
     packable: this.props.packableStatus

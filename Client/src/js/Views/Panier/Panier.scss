@@ -1,177 +1,548 @@
-.panierPageWrap {
-  background: white;
-  height: auto;
-  padding-top: 50px;
-  position: relative;
-  top: 55px;
-  width: 100%;
-
-  .isHidden {
-    display: none;
-  }
-  //position
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .p_professionnel {
-    color: #ff0066;
-    font-style: italic;
-    margin: 10px auto 30px auto;
-    a {
-      color: #ff0066;
-      cursor: pointer;
-      font-weight: 600;
-      text-decoration: underline;
-    }
-  }
-
-  .mainPanier {
-    display: flex;
-    justify-content: center;
+@media screen and (min-width: 849px) {
+  .panierPageWrap {
+    background: white;
+    height: auto;
+    padding-top: 50px;
+    position: relative;
+    top: 55px;
     width: 100%;
-    .leftPanier {
-      height: auto;
-      min-height: 500px;
-      width: 40%;
 
-      h2 {
+    .isHidden {
+      display: none;
+    }
+    //position
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .p_professionnel {
+      color: #ff0066;
+      font-style: italic;
+      margin: 10px auto 30px auto;
+      a {
         color: #ff0066;
-        font-weight: lighter;
-        margin: 10px 0px 7px 0px;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
       }
+    }
 
-      .ligne_rose {
-        background: #ff0066;
-        height: 1px;
-        margin-bottom: 15px;
-        width: 80%;
-      }
-      table {
-        border-collapse: collapse;
-        margin: 20px 0px 40px 0px;
-        width: 80%;
+    .mainPanier {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      .leftPanier {
+        height: auto;
+        min-height: 500px;
+        width: 40%;
 
-        thead {
-          tr {
-            th {
-              background-color: #ff0066;
-              color: white;
+        h2 {
+          color: #ff0066;
+          font-weight: lighter;
+          margin: 10px 0px 7px 0px;
+        }
 
-              &:first-child {
-                width: 70%;
+        .ligne_rose {
+          background: #ff0066;
+          height: 1px;
+          margin-bottom: 15px;
+          width: 80%;
+        }
+        table {
+          border-collapse: collapse;
+          margin: 20px 0px 40px 0px;
+          width: 80%;
+
+          thead {
+            tr {
+              th {
+                background-color: #ff0066;
+                color: white;
+
+                &:first-child {
+                  width: 70%;
+                }
               }
             }
           }
+
+          td,
+          th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-family: "roadgeek_2005_engschriftRg";
+            font-weight: 300;
+            text-align: left;
+            input {
+              margin: 0 3px 0 3px;
+              width: 30%;
+            }
+            i {
+              cursor: pointer;
+              padding-left: 4%;
+            }
+          }
+
+          td {
+            &:last-child {
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+        }
+      }
+      .rightPanier {
+        background: #ff0066;
+        border-radius: 3px;
+        height: auto;
+        min-height: 400px;
+        width: 20%;
+
+        h2 {
+          color: white;
+          font-size: 1.3em;
+          font-weight: lighter;
+          margin: 10px 10px 10px 11%;
+        }
+        .ligne_blanche {
+          background: white;
+          height: 1px;
+          margin-bottom: 12%;
+          width: 100%;
         }
 
-        td,
-        th {
-          border: 1px solid #ddd;
-          padding: 12px;
-          font-family: "roadgeek_2005_engschriftRg";
-          font-weight: 300;
-          text-align: left;
-          input {
-            margin: 0 3px 0 3px;
-            width: 30%;
-          }
-          i {
-            cursor: pointer;
-            padding-left: 4%;
-          }
-        }
-
-        td {
-          &:last-child {
+        div {
+          div.flex_right_panier {
             display: flex;
-            align-items: center;
-          }
-        }
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
 
-        tr:nth-child(even) {
-          background-color: #f2f2f2;
+            p {
+              color: white;
+              font-family: "roadgeek_2005_engschriftRg";
+              padding: 3%;
+              &:first-child {
+                min-width: 70%;
+              }
+            }
+          }
+
+          .flex_col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              color: white;
+
+              a {
+                text-decoration: underline;
+                color: white;
+              }
+            }
+          }
+
+          .ligne_blanche_courte {
+            background: white;
+            height: 1px;
+            margin: auto;
+            width: 80%;
+          }
+
+          .italique {
+            color: white;
+            font-style: italic;
+            font-weight: bold;
+            margin: 20% auto 10% auto;
+            width: 50%;
+          }
+
+          .validateButton {
+            background: white;
+            border-radius: 10px;
+            color: #ff0066;
+            cursor: pointer;
+            font-family: "roadgeek_2005_engschriftRg";
+            font-size: 1em;
+            height: 30px;
+            margin: 20% auto 10% auto;
+            width: 95px;
+          }
         }
       }
     }
-    .rightPanier {
-      background: #ff0066;
-      border-radius: 3px;
-      height: auto;
-      min-height: 400px;
-      width: 20%;
+  }
+}
 
-      h2 {
-        color: white;
-        font-size: 1.3em;
-        font-weight: lighter;
-        margin: 10px 10px 10px 11%;
+@media screen and (min-width: 550px) and (max-width: 849px) {
+  .panierPageWrap {
+    background: white;
+    height: auto;
+    padding-top: 50px;
+    position: relative;
+    top: 55px;
+    width: 100%;
+
+    .isHidden {
+      display: none;
+    }
+    //position
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .p_professionnel {
+      color: #ff0066;
+      font-style: italic;
+      margin: 10px auto 30px auto;
+      a {
+        color: #ff0066;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
       }
-      .ligne_blanche {
-        background: white;
-        height: 1px;
-        margin-bottom: 12%;
-        width: 100%;
-      }
+    }
 
-      div {
-        div.flex_right_panier {
-          display: flex;
-          justify-content: space-between;
-          width: 80%;
-          margin: auto;
+    .mainPanier {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
 
-          p {
-            color: white;
+      .leftPanier {
+        height: auto;
+        min-height: 200px;
+        width: 50%;
+
+        h2 {
+          color: #ff0066;
+          font-weight: lighter;
+          margin: 10px 0px 7px 0px;
+        }
+
+        .ligne_rose {
+          background: #ff0066;
+          height: 1px;
+          margin-bottom: 15px;
+          width: 100%;
+        }
+        table {
+          border-collapse: collapse;
+          margin: 20px 0px 40px 0px;
+          width: 100%;
+
+          thead {
+            tr {
+              th {
+                background-color: #ff0066;
+                color: white;
+
+                &:first-child {
+                  width: 70%;
+                }
+              }
+            }
+          }
+
+          td,
+          th {
+            border: 1px solid #ddd;
+            padding: 12px;
             font-family: "roadgeek_2005_engschriftRg";
-            padding: 3%;
-            &:first-child {
-              min-width: 70%;
+            font-weight: 300;
+            text-align: left;
+            input {
+              margin: 0 3px 0 3px;
+              width: 30%;
+            }
+            i {
+              cursor: pointer;
+              padding-left: 4%;
             }
           }
-        }
 
-        .flex_col {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-
-          p {
-            color: white;
-
-            a {
-              text-decoration: underline;
-              color: white;
+          td {
+            &:last-child {
+              display: flex;
+              align-items: center;
             }
           }
-        }
 
-        .ligne_blanche_courte {
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+        }
+      }
+      .rightPanier {
+        background: #ff0066;
+        border-radius: 3px;
+        height: auto;
+        min-height: 400px;
+        width: 50%;
+
+        h2 {
+          color: white;
+          font-size: 1.3em;
+          font-weight: lighter;
+          margin: 10px 10px 10px 11%;
+        }
+        .ligne_blanche {
           background: white;
           height: 1px;
-          margin: auto;
-          width: 80%;
+          margin-bottom: 12%;
+          width: 100%;
         }
 
-        .italique {
-          color: white;
-          font-style: italic;
-          font-weight: bold;
-          margin: 20% auto 10% auto;
-          width: 50%;
-        }
+        div {
+          div.flex_right_panier {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
 
-        .validateButton {
-          background: white;
-          border-radius: 10px;
+            p {
+              color: white;
+              font-family: "roadgeek_2005_engschriftRg";
+              padding: 3%;
+              &:first-child {
+                min-width: 70%;
+              }
+            }
+          }
+
+          .flex_col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              color: white;
+
+              a {
+                text-decoration: underline;
+                color: white;
+              }
+            }
+          }
+
+          .ligne_blanche_courte {
+            background: white;
+            height: 1px;
+            margin: auto;
+            width: 80%;
+          }
+
+          .italique {
+            color: white;
+            font-style: italic;
+            font-weight: bold;
+            margin: 20% auto 10% auto;
+            width: 50%;
+          }
+
+          .validateButton {
+            background: white;
+            border-radius: 10px;
+            color: #ff0066;
+            cursor: pointer;
+            font-family: "roadgeek_2005_engschriftRg";
+            font-size: 1em;
+            height: 30px;
+            margin: 20% auto 10% auto;
+            width: 95px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .panierPageWrap {
+    background: white;
+    height: auto;
+    padding-top: 50px;
+    position: relative;
+    top: 55px;
+    width: 100%;
+
+    .isHidden {
+      display: none;
+    }
+    //position
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .p_professionnel {
+      color: #ff0066;
+      font-style: italic;
+      margin: 10px auto 30px auto;
+      a {
+        color: #ff0066;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+
+    .mainPanier {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      .leftPanier {
+        height: auto;
+        min-height: 200px;
+        width: 75%;
+
+        h2 {
           color: #ff0066;
-          cursor: pointer;
-          font-family: "roadgeek_2005_engschriftRg";
-          font-size: 1em;
-          height: 30px;
-          margin: 20% auto 10% auto;
-          width: 95px;
+          font-weight: lighter;
+          margin: 10px 0px 7px 0px;
+        }
+
+        .ligne_rose {
+          background: #ff0066;
+          height: 1px;
+          margin-bottom: 15px;
+          width: 100%;
+        }
+        table {
+          border-collapse: collapse;
+          margin: 20px 0px 40px 0px;
+          width: 100%;
+
+          thead {
+            tr {
+              th {
+                background-color: #ff0066;
+                color: white;
+
+                &:first-child {
+                  width: 70%;
+                }
+              }
+            }
+          }
+
+          td,
+          th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-family: "roadgeek_2005_engschriftRg";
+            font-weight: 300;
+            text-align: left;
+            input {
+              margin: 0 3px 0 3px;
+              width: 30%;
+            }
+            i {
+              cursor: pointer;
+              padding-left: 4%;
+            }
+          }
+
+          td {
+            &:last-child {
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+        }
+      }
+      .rightPanier {
+        background: #ff0066;
+        border-radius: 3px;
+        height: auto;
+        min-height: 400px;
+        width: 75%;
+
+        h2 {
+          color: white;
+          font-size: 1.3em;
+          font-weight: lighter;
+          margin: 10px 10px 10px 11%;
+        }
+        .ligne_blanche {
+          background: white;
+          height: 1px;
+          margin-bottom: 12%;
+          width: 100%;
+        }
+
+        div {
+          div.flex_right_panier {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
+
+            p {
+              color: white;
+              font-family: "roadgeek_2005_engschriftRg";
+              padding: 3%;
+              &:first-child {
+                min-width: 70%;
+              }
+            }
+          }
+
+          .flex_col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              color: white;
+
+              a {
+                text-decoration: underline;
+                color: white;
+              }
+            }
+          }
+
+          .ligne_blanche_courte {
+            background: white;
+            height: 1px;
+            margin: auto;
+            width: 80%;
+          }
+
+          .italique {
+            color: white;
+            font-style: italic;
+            font-weight: bold;
+            margin: 20% auto 10% auto;
+            width: 50%;
+          }
+
+          .validateButton {
+            background: white;
+            border-radius: 10px;
+            color: #ff0066;
+            cursor: pointer;
+            font-family: "roadgeek_2005_engschriftRg";
+            font-size: 1em;
+            height: 30px;
+            margin: 20% auto 10% auto;
+            width: 95px;
+          }
         }
       }
     }

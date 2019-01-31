@@ -141,17 +141,17 @@ class ClientDashboardClass extends Component {
                       <tr>
                         <th>Numéro de la commande</th>
                         <th>Date de commande</th>
-                        <th>Quantité</th>
-                        <th>Bière</th>
+                        <th>Montant</th>
+                        <th>Retrait prévu</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.state.currentCommandes.map(e => (
                         <tr key={e.cmd_id}>
-                          <th>{e.cmd_id}</th>
-                          <th>{e.cmd_date}</th>
-                          <th>{e.det_qte_produit}</th>
-                          <th>{e.nom}</th>
+                          <td>{e.cmd_id}</td>
+                          <td>{e.cmd_date}</td>
+                          <td>{e.cmd_prix}€</td>
+                          <td>{e.cmd_dateheure_recup}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -166,19 +166,17 @@ class ClientDashboardClass extends Component {
                       <tr>
                         <th>Numéro de la commande</th>
                         <th>Date de commande</th>
-                        <th>Quantité</th>
-                        <th>Bière</th>
+                        <th>Montant</th>
                         <th>Retrait</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.state.passedCommandes.map(e => (
                         <tr key={e.cmd_id}>
-                          <th>{e.cmd_id}</th>
-                          <th>{e.cmd_date}</th>
-                          <th>{e.det_qte_produit}</th>
-                          <th>{e.nom}</th>
-                          <th>{e.cmd_dateheure_recup}</th>
+                          <td>{e.cmd_id}</td>
+                          <td>{e.cmd_date}</td>
+                          <td>{e.cmd_prix}€</td>
+                          <td>{e.cmd_dateheure_recup}</td>
                         </tr>
                       ))}
                     </tbody>

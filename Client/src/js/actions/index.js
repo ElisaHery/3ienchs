@@ -12,6 +12,7 @@ export const AddPricePanier = CalculatedPrice => ({
   type: "ADD_PRICE_PANIER",
   payload: CalculatedPrice
 });
+
 export const AddTotalPrice = totalPrice => ({
   type: "ADD_TOTAL_PRICE",
   payload: totalPrice

@@ -32,7 +32,7 @@ const commandesModel = function commandesModel(connection) {
   //USER : VOIR SON HISTORIQUE DE COMMANDES
   const getUserOldCommandes = function getUserOldCommandes(clbk, user_id) {
     const q =
-      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1 ORDER BY det_id_comm ASC";
+      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, cmd_prix, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1 ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
       // console.log(this.sql);
       // console.log(data);
@@ -47,7 +47,7 @@ const commandesModel = function commandesModel(connection) {
     user_id
   ) {
     const q =
-      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 0  ORDER BY det_id_comm ASC";
+      "SELECT cmd_id, cmd_date, cmd_dateheure_recup, cmd_prix, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 0  ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
       console.log(this.sql);
       console.log(data);
@@ -60,12 +60,12 @@ const commandesModel = function commandesModel(connection) {
 
   const createCommande = function createCommande(clbk, input) {
     const q =
-      "INSERT into commandes (cmd_id_user, cmd_date, cmd_dateheure_recup, cmd_over) VALUES (?, now(), ?, ?)";
+      "INSERT into commandes (cmd_id_user, cmd_date, cmd_dateheure_recup, cmd_prix, cmd_over) VALUES (?, now(), ?, ?, ?)";
     const q2 =
       "INSERT into details_commande (det_id_comm, det_id_produit, det_qte_produit) VALUES (?, ?, ?)";
     const query1 = connection.query(
       q,
-      [input.id_user, input.dateheure, input.cmd_over],
+      [input.id_user, input.dateheure, input.cmd_prix, input.cmd_over],
       function(err, resultsFromQ1, fields) {
         if (err) return clbk(err, null);
         //       console.log("resultats requete 1 --> ", resultsFromQ1);

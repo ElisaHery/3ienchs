@@ -1,65 +1,244 @@
-.dashboardContainer {
-  display: flex;
-  height: auto;
-  justify-content: center;
-  margin: 20px auto 0px auto;
-  padding-bottom: 6%;
-  width: 70%;
+@media screen and (min-width: 1180px) {
+  .dashboardContainer {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin: 20px auto 0px auto;
+    padding-bottom: 6%;
+    width: 70%;
 
-  .menuDashboard {
-    background: white;
-    border-radius: 10px;
-    margin-right: 5px;
-    width: 23%;
-    ul {
-      li {
-        cursor: pointer;
-        margin: 20px;
-        font-family: "roadgeek_2005_engschriftRg";
-        font-size: 1.3em;
-        &:last-child {
-          color: #ff0066;
+    .menuDashboard {
+      background: white;
+      border-radius: 10px;
+      margin-right: 5px;
+      width: 23%;
+      ul {
+        li {
+          cursor: pointer;
+          margin: 20px;
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1.3em;
+          &:last-child {
+            color: #ff0066;
+          }
+        }
+      }
+    }
+    .dashboard {
+      background: white;
+      border-radius: 10px;
+      width: 75%;
+
+      .title {
+        font-size: 1.5em;
+        margin: 30px;
+      }
+
+      .p_board {
+        margin: 30px 30px 60px 30px;
+      }
+
+      .table_commandes {
+        border-collapse: collapse;
+        margin: 20px 0px 40px 30px;
+
+        th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+
+          background-color: #48346d;
+          color: white;
+        }
+
+        td,
+        th {
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1.1em;
+          font-weight: 300;
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
         }
       }
     }
   }
-  .dashboard {
-    background: white;
-    border-radius: 10px;
-    width: 75%;
+}
 
-    .title {
-      font-size: 1.5em;
-      margin: 30px;
+@media screen and (min-width: 769px) and (max-width: 1179px) {
+  .dashboardContainer {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin: 20px auto 0px auto;
+    padding-bottom: 6%;
+    width: 90%;
+
+    .menuDashboard {
+      background: white;
+      border-radius: 10px;
+      margin-right: 5px;
+      width: 23%;
+      ul {
+        li {
+          cursor: pointer;
+          margin: 20px;
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1.3em;
+          &:last-child {
+            color: #ff0066;
+          }
+        }
+      }
     }
+    .dashboard {
+      background: white;
+      border-radius: 10px;
+      width: 75%;
 
-    .p_board {
-      margin: 30px 30px 60px 30px;
-    }
-
-    .table_commandes {
-      border-collapse: collapse;
-      margin: 20px 0px 40px 30px;
-
-      th {
-        font-family: "roadgeek_2005_engschriftRg";
-        font-weight: 300;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-
-        background-color: #48346d;
-        color: white;
+      .title {
+        font-size: 1.5em;
+        margin: 30px;
       }
 
+      .p_board {
+        margin: 30px 30px 60px 30px;
+      }
+
+      .table_commandes {
+        border-collapse: collapse;
+        margin: 20px 20px 40px 30px;
+
+        th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+
+          background-color: #48346d;
+          color: white;
+        }
+
+        td,
+        th {
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1.1em;
+          font-weight: 300;
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    margin: 20px auto 0px auto;
+    padding-bottom: 6%;
+    width: 70%;
+
+    .menuDashboard {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      // width: 23%;
+      ul {
+        display: flex;
+        list-style: none;
+        li {
+          cursor: pointer;
+          margin: 20px;
+          font-family: "roadgeek_2005_engschriftRg";
+          font-size: 1.3em;
+          &:last-child {
+            color: #ff0066;
+          }
+        }
+      }
+    }
+    .dashboard {
+      background: white;
+      border-radius: 10px;
+      width: 100%;
+
+      .title {
+        font-size: 1.5em;
+        margin: 30px;
+      }
+
+      .p_board {
+        margin: 30px 30px 60px 30px;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
       td,
-      th {
-        border: 1px solid #ddd;
-        padding: 8px;
+      tr {
+        display: block;
       }
 
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr {
+        // border: 1px solid #ccc;
+        margin: 20px;
+        &:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      }
+
+      td {
+        /* Behave  like a "row" */
+        border: none;
+        // border-bottom: 1px solid #eee;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.1em;
+        font-weight: 300;
+        position: relative;
+        padding-left: 50%;
+
+        &:before {
+          /* Now like a table header */
+          position: absolute;
+          //   /* Top/left values mimic padding */
+          background-color: #48346d;
+          color: white;
+          left: 6px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+        }
+
+        &:nth-of-type(1):before {
+          content: "Numéro de commande";
+        }
+        &:nth-of-type(2):before {
+          content: "Date de commande";
+        }
+        &:nth-of-type(3):before {
+          content: "Prix";
+        }
+
+        &:nth-of-type(4):before {
+          content: "Retrait";
+        }
       }
     }
   }

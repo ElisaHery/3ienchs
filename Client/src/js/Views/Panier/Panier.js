@@ -101,10 +101,11 @@ class PanierClass extends Component {
   validateCommande = () => {
     document.body.classList.remove("noscroll-class");
     let user = JSON.parse(localStorage.getItem("user"));
-    // console.log(user.user_id);
+    const totalPrice = this.calculTotalPanier();
     const data = {
       id_user: user.user_id,
       dateheure_recup: null,
+      cmd_prix: totalPrice,
       cmd_over: 0,
       panier: this.props.articlesPanier
     };

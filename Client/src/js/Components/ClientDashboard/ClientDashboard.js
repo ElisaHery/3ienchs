@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { ConnectedUser, LogoutUser } from "./../../actions";
+import Moment from "react-moment";
 
 import PathToBack from "../../PathToBack";
 import "./ClientDashboard.scss";
@@ -43,16 +44,16 @@ class ClientDashboardClass extends Component {
 
   componentDidMount() {
     // const userID = this.props.userID;
-    // commandes en cours
-    this.callApi(`${PathToBack}current_commandes_user/${userID}`)
+    // récupère les commandes en cours
+    this.callApi(`${PathToBack}commandesUser/${userID}/0`)
       .then(res => {
         // console.log("commandes en cours ==>", res);
         this.setState({ currentCommandes: res });
       })
       .catch(err => console.log(err));
 
-    // commandes passées
-    this.callApi(`${PathToBack}old_commandes_user/${userID}`)
+    // récupère les commandes passées
+    this.callApi(`${PathToBack}commandesUser/${userID}/1`)
       .then(res => {
         // console.log("commandes passées ==>", res);
         this.setState({ passedCommandes: res });
@@ -112,98 +113,109 @@ class ClientDashboardClass extends Component {
 
     const token = JSON.parse(localStorage.getItem("token") || "null");
     // console.log(token);
-    if (!token) {
-      return <p> Votre connexion n'est pas sécurisée</p>;
-    }
-
-    return (
-      <Fragment>
-        <section className="dashboardContainer">
-          <div className="menuDashboard">
-            <ul>
-              <li name="showCommandes" onClick={e => this.toggleDashboard(e)}>
-                Mes commandes
-              </li>
-              <li name="showAccount" onClick={e => this.toggleDashboard(e)}>
-                Mon compte
-              </li>
-              <li onClick={e => this.logOut(e)}>Déconnexion</li>
-            </ul>
-          </div>
-          <div className="dashboard">
-            {this.state.showCommandes && (
-              <Fragment>
-                {" "}
-                <p className="title">Mes commandes en cours</p>
-                {this.state.currentCommandes.length !== 0 ? (
-                  <table className="table_commandes">
-                    <thead>
-                      <tr>
-                        <th>Numéro de la commande</th>
-                        <th>Date de commande</th>
-                        <th>Montant</th>
-                        <th>Retrait prévu</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.currentCommandes.map(e => (
-                        <tr key={e.cmd_id}>
-                          <td>{e.cmd_id}</td>
-                          <td>{e.cmd_date}</td>
-                          <td>{e.cmd_prix}€</td>
-                          <td>{e.cmd_dateheure_recup}</td>
+    if (token)
+      return (
+        <Fragment>
+          <section className="dashboardContainer">
+            <div className="menuDashboard">
+              <ul>
+                <li name="showCommandes" onClick={e => this.toggleDashboard(e)}>
+                  Mes commandes
+                </li>
+                <li name="showAccount" onClick={e => this.toggleDashboard(e)}>
+                  Mon compte
+                </li>
+                <li onClick={e => this.logOut(e)}>Déconnexion</li>
+              </ul>
+            </div>
+            <div className="dashboard">
+              {this.state.showCommandes && (
+                <Fragment>
+                  {" "}
+                  <p className="title">Mes commandes en cours</p>
+                  {this.state.currentCommandes.length !== 0 ? (
+                    <table className="table_commandes">
+                      <thead>
+                        <tr>
+                          <th>N° de commande</th>
+                          <th>Date de commande</th>
+                          <th>Montant</th>
+                          <th>Retrait prévu</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="p_board">Vous n'avez pas d'historique</p>
-                )}
-                <p className="title">Mes commandes passées</p>{" "}
-                {this.state.passedCommandes.length !== 0 ? (
-                  <table className="table_commandes">
-                    <thead>
-                      <tr>
-                        <th>Numéro de la commande</th>
-                        <th>Date de commande</th>
-                        <th>Montant</th>
-                        <th>Retrait</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.passedCommandes.map(e => (
-                        <tr key={e.cmd_id}>
-                          <td>{e.cmd_id}</td>
-                          <td>{e.cmd_date}</td>
-                          <td>{e.cmd_prix}€</td>
-                          <td>{e.cmd_dateheure_recup}</td>
+                      </thead>
+                      <tbody>
+                        {this.state.currentCommandes.map(e => (
+                          <tr key={e.cmd_id}>
+                            <td>{e.cmd_id}</td>
+                            <td>
+                              {" "}
+                              <Moment format="DD/MM/YYYY">{e.cmd_date}</Moment>
+                            </td>
+                            {/* <td>{e.cmd_date}</td> */}
+                            <td>{e.cmd_prix.toFixed(2)} €</td>
+                            <td>
+                              {" "}
+                              <Moment format="DD/MM/YYYY">
+                                {e.cmd_dateheure_recup}
+                              </Moment>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="p_board">Vous n'avez pas d'historique</p>
+                  )}
+                  <p className="title">Mes commandes passées</p>{" "}
+                  {this.state.passedCommandes.length !== 0 ? (
+                    <table className="table_commandes">
+                      <thead>
+                        <tr>
+                          <th>N° de commande</th>
+                          <th>Date de commande</th>
+                          <th>Montant</th>
+                          <th>Retrait</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="p_board">Vous n'avez pas d'historique</p>
-                )}
-              </Fragment>
-            )}
+                      </thead>
+                      <tbody>
+                        {this.state.passedCommandes.map(e => (
+                          <tr key={e.cmd_id}>
+                            <td>{e.cmd_id}</td>
+                            <td>
+                              {" "}
+                              <Moment format="DD/MM/YYYY">{e.cmd_date}</Moment>
+                            </td>
+                            <td>{e.cmd_prix.toFixed(2)}€</td>
+                            <Moment format="DD/MM/YYYY">
+                              {e.cmd_dateheure_recup}
+                            </Moment>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="p_board">Vous n'avez pas d'historique</p>
+                  )}
+                </Fragment>
+              )}
 
-            {this.state.showAccount && (
-              <Fragment>
-                <p>
-                  <span>Nom :</span> <span>{userNom}</span>
-                </p>
-                <p>
-                  <span>Prénom :</span> <span>{userPrenom}</span>
-                </p>
-                <p>
-                  <span>Mail :</span> <span>{userMail}</span>
-                </p>
-              </Fragment>
-            )}
-          </div>
-        </section>
-      </Fragment>
-    );
+              {this.state.showAccount && (
+                <Fragment>
+                  <p>
+                    <span>Nom :</span> <span>{userNom}</span>
+                  </p>
+                  <p>
+                    <span>Prénom :</span> <span>{userPrenom}</span>
+                  </p>
+                  <p>
+                    <span>Mail :</span> <span>{userMail}</span>
+                  </p>
+                </Fragment>
+              )}
+            </div>
+          </section>
+        </Fragment>
+      );
   }
 }
 

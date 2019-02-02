@@ -33,7 +33,8 @@ const mapStateToProps = state => {
 class PanierClass extends Component {
   state = {
     afficherConnexionMessage: false,
-    afficherModale: false
+    afficherModale: false,
+    startDate: new Date()
   };
 
   callApi = async (url, corps) => {
@@ -41,6 +42,25 @@ class PanierClass extends Component {
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
+  };
+
+  handleDate = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
+  setHours = date => {
+    console.log(date);
+    // this.setState({
+    //   startDate: date
+    // });
+  };
+  setMinutes = date => {
+    console.log(date);
+    // this.setState({
+    //   startDate: date
+    // });
   };
 
   //met à jour la quantité avec le select (1 à 10 bières)
@@ -137,6 +157,7 @@ class PanierClass extends Component {
   };
 
   render() {
+    var date = new Date();
     return (
       <Fragment>
         <Header />
@@ -254,7 +275,13 @@ class PanierClass extends Component {
 
                     <DatePicker
                       selected={this.state.startDate}
-                      onChange={this.handleChange}
+                      onChange={this.handleDate}
+                      showTimeSelect
+                      // minTime={setHours(setMinutes(new Date(), 0), 17)}
+                      // maxTime={setHours(setMinutes(new Date(), 30), 20)}
+                      minTime={new Date().setHours(17)}
+                      maxTime={new Date().setHours(20)}
+                      dateFormat="dd/MM/yyyy"
                     />
                     <button
                       className="validateButton"

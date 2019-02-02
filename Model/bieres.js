@@ -4,7 +4,7 @@
 
 const bieresModel = function bieresModel(connection) {
   const getClassicBieres = function getClassicBieres(clbk, id) {
-    console.log(id);
+    // console.log(id);
     let q;
     if (id) {
       q = "SELECT * FROM bieres WHERE biere_id = ?";
@@ -13,7 +13,7 @@ const bieresModel = function bieresModel(connection) {
     }
     connection.query(q, [id], function(err, data, fields) {
       console.log(this.sql);
-      console.log(data);
+      console.log("réponse -->", data);
       if (err) return clbk(err, null);
       else return clbk(null, data);
     });

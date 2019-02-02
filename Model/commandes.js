@@ -19,9 +19,10 @@ const commandesModel = function commandesModel(connection) {
     });
   };
 
-  const getUsersCommandes = function getUsersCommandes(clbk, user_id) {
-    const q = "SELECT * FROM commandes WHERE cmd_id_user = ?";
-    connection.query(q, [user_id], function(err, data, fields) {
+  //récupère les commandes d'un client, en cours ou passées selon le paramètre over
+  const getUserCommandes = function getUserCommandes(clbk, user_id, over) {
+    const q = "SELECT * FROM commandes WHERE cmd_id_user = ? AND cmd_over = ?";
+    connection.query(q, [user_id, over], function(err, data, fields) {
       console.log(this.sql);
       console.log(data);
       if (err) return clbk(err, null);
@@ -29,8 +30,11 @@ const commandesModel = function commandesModel(connection) {
     });
   };
 
-  //USER : VOIR SON HISTORIQUE DE COMMANDES
-  const getUserOldCommandes = function getUserOldCommandes(clbk, user_id) {
+  //USER : VOIR LE DETAIL DE SON HISTORIQUE DE COMMANDES
+  const getUserOldCommandesDetails = function getUserOldCommandes(
+    clbk,
+    user_id
+  ) {
     const q =
       "SELECT cmd_id, cmd_date, cmd_dateheure_recup, cmd_prix, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 1 ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
@@ -41,8 +45,8 @@ const commandesModel = function commandesModel(connection) {
     });
   };
 
-  //USER : VOIR SES COMMANDES EN COURS
-  const getUserCurrentCommandes = function getUserCurrentCommandes(
+  //USER : VOIR LE DETAIL DE SES COMMANDES EN COURS
+  const getUserCurrentCommandesDetails = function getUserCurrentCommandes(
     clbk,
     user_id
   ) {
@@ -119,9 +123,9 @@ const commandesModel = function commandesModel(connection) {
 
   return {
     get,
-    getUsersCommandes,
-    getUserOldCommandes,
-    getUserCurrentCommandes,
+    getUserCommandes,
+    getUserOldCommandesDetails,
+    getUserCurrentCommandesDetails,
     post: createCommande,
     update,
     remove

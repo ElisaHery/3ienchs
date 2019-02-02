@@ -6,30 +6,41 @@ const commandesApi = function usersApi(connection) {
   const router = require("express").Router();
   const commandesModel = require("./../Model/commandes")(connection);
 
-  router.get("/commandes", (req, res) => {
-    commandesModel.get((err, dataset) => {
-      res.send(dataset);
-    }, null);
+  // router.get("/commandes", (req, res) => {
+  //   commandesModel.get((err, dataset) => {
+  //     res.send(dataset);
+  //   }, null);
+  // });
+
+  // router.get("/commande/:id", (req, res) => {
+  //   commandesModel.get((err, dataset) => {
+  //     if (err) return res.status(500).send(err);
+  //     return res.status(200).send(dataset);
+  //   }, req.params.id);
+  // });
+
+  //VOIR LES COMMANDES SANS LE DETAIL
+  router.get("/commandesUser/:id/:over", (req, res) => {
+    commandesModel.getUserCommandes(
+      (err, dataset) => {
+        res.send(dataset);
+      },
+      req.params.id,
+      req.params.over
+    );
   });
 
-  router.get("/commande/:id", (req, res) => {
-    commandesModel.get((err, dataset) => {
-      if (err) return res.status(500).send(err);
-      return res.status(200).send(dataset);
-    }, req.params.id);
-  });
-
-  //USER : VOIR SON HISTORIQUE DE COMMANDES
+  //USER : VOIR LE DETAIL DE SON HISTORIQUE DE COMMANDES
   router.get("/old_commandes_user/:user_id", (req, res) => {
-    commandesModel.getUserOldCommandes((err, dataset) => {
+    commandesModel.getUserOldCommandesDetails((err, dataset) => {
       if (err) return res.status(500).send(err);
       return res.status(200).send(dataset);
     }, req.params.user_id);
   });
 
-  //USER : VOIR SES COMMANDES EN COURS
+  //USER : VOIR VOIR LE DETAIL DE SES COMMANDES EN COURS
   router.get("/current_commandes_user/:user_id", (req, res) => {
-    commandesModel.getUserCurrentCommandes((err, dataset) => {
+    commandesModel.getUserCurrentCommandesDetails((err, dataset) => {
       if (err) return res.status(500).send(err);
       return res.status(200).send(dataset);
     }, req.params.user_id);

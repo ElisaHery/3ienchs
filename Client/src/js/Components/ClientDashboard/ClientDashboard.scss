@@ -152,13 +152,13 @@
       background: white;
       border-radius: 10px;
       margin-bottom: 5px;
-      // width: 23%;
+      width: 100%;
       ul {
         display: flex;
         list-style: none;
+        flex-wrap: wrap;
         li {
-          cursor: pointer;
-          margin: 20px;
+          margin: 7px;
           font-family: "roadgeek_2005_engschriftRg";
           font-size: 1.3em;
           &:last-child {
@@ -212,7 +212,7 @@
         font-size: 1.1em;
         font-weight: 300;
         position: relative;
-        padding-left: 50%;
+        padding-left: 58%;
 
         &:before {
           /* Now like a table header */
@@ -222,15 +222,16 @@
           color: white;
           left: 6px;
           width: 45%;
-          padding-right: 10px;
+          min-width: 90px;
+          padding: 0 5px 0 5px;
           white-space: nowrap;
         }
 
         &:nth-of-type(1):before {
-          content: "Numéro de commande";
+          content: "N° commande";
         }
         &:nth-of-type(2):before {
-          content: "Date de commande";
+          content: "Date commande";
         }
         &:nth-of-type(3):before {
           content: "Prix";

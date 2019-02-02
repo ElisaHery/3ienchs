@@ -16,8 +16,11 @@
       form {
         display: flex;
         flex-direction: column;
+        width: 150px;
         input {
           margin: 2px 0 2px 0;
+          padding: 0;
+          // width: 150px;
         }
         button {
           background: black;
@@ -31,7 +34,7 @@
           padding: 2px 1px;
           text-align: center;
           transition: 0.4s;
-          width: 150px;
+          width: 100%;
         }
       }
 

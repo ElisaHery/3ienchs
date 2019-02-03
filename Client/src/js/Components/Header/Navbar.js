@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -51,24 +51,29 @@ class HeaderClass extends Component {
         <div>
           <ul>
             <li className="li_left">
-              <Link to="/">
+              <NavLink to="/">
                 <img src={minilogo} className="minilogo" alt="logo_iench" />{" "}
-              </Link>
+              </NavLink>
             </li>
             <li className="li_left">
-              {" "}
-              <Link to="/" style={{ cursor: "pointer" }}>
-                <span>Accueil</span>
-              </Link>
+              <NavLink exact activeClassName="isActive" to="/">
+                Accueil
+              </NavLink>
             </li>
             <li className="li_left">
-              <Link to="/bieres">Nos bières</Link>
+              <NavLink exact activeClassName="isActive" to="/bieres">
+                Nos bières
+              </NavLink>
             </li>
             <li className="li_left">
-              <Link to="/apropos">À propos</Link>
+              <NavLink exact activeClassName="isActive" to="/apropos">
+                À propos
+              </NavLink>
             </li>
             <li className="li_left">
-              <Link to="/vente">Points de vente</Link>
+              <NavLink exact activeClassName="isActive" to="/vente">
+                Points de vente
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -76,30 +81,35 @@ class HeaderClass extends Component {
         <div>
           <ul>
             <li>
-              <Link to="/login">
+              <NavLink to="/login">
                 <img
                   src={connexion_icon}
                   className="userIcon"
                   alt="connexion_icon"
                 />{" "}
-              </Link>
+              </NavLink>
             </li>
             {/* <li className="li_right">
             <Link to="/login">Connexion</Link>
           </li> */}
             {connectedUser ? (
               <li className="li_right">
-                <Link to="/login"> {userPrenom} </Link>
+                <NavLink exact activeClassName="isActive" to="/login">
+                  {" "}
+                  {userPrenom}{" "}
+                </NavLink>
               </li>
             ) : (
               <li className="li_right">
-                <Link to="/login">Connexion</Link>
+                <NavLink exact activeClassName="isActive" to="/login">
+                  Connexion
+                </NavLink>
               </li>
             )}
             <li className="li_right">
-              <Link to="/panier">
+              <NavLink exact activeClassName="isActive" to="/panier">
                 <img src={basket} className="basketIcon" alt="panier_icon" />{" "}
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

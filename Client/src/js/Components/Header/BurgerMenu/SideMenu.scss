@@ -20,6 +20,13 @@
     flex-direction: column;
     li {
       margin: 0.5rem;
+      .isActive {
+        border-bottom: 1px solid white;
+
+        &:hover {
+          border-bottom: 1px solid #ff0066;
+        }
+      }
       a {
         color: white;
         font-family: "roadgeek_2005_engschriftRg";

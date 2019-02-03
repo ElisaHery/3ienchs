@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import fr from "date-fns/locale/fr";
+import Moment from "react-moment";
 
 import { connect } from "react-redux";
 import { AddPanier, AddPricePanier, DeleteFromPanier } from "./../../actions";
@@ -13,7 +15,7 @@ import PathToBack from "../../PathToBack";
 
 import "./Panier.scss";
 
-// let connectedUser;
+registerLocale("fr", fr);
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -34,9 +36,10 @@ class PanierClass extends Component {
   state = {
     afficherConnexionMessage: false,
     afficherModale: false,
-    startDate: new Date()
+    dateHeureRecup: new Date()
   };
 
+  // registerLocale("en-GB", enGB);
   callApi = async (url, corps) => {
     const response = await fetch(url, corps);
     const body = await response.json();
@@ -44,23 +47,19 @@ class PanierClass extends Component {
     return body;
   };
 
-  handleDate = date => {
-    this.setState({
-      startDate: date
-    });
+  addHours = (initial, h) => {
+    initial.setHours(initial.getHours() + h);
+    return initial;
   };
 
-  setHours = date => {
-    console.log(date);
-    // this.setState({
-    //   startDate: date
-    // });
+  disableDate = date => {
+    return date.getDay() === 4 || date.getDay() === 5;
   };
-  setMinutes = date => {
-    console.log(date);
-    // this.setState({
-    //   startDate: date
-    // });
+
+  handleDate = date => {
+    this.setState({
+      dateHeureRecup: date
+    });
   };
 
   //met à jour la quantité avec le select (1 à 10 bières)
@@ -122,9 +121,11 @@ class PanierClass extends Component {
     document.body.classList.remove("noscroll-class");
     let user = JSON.parse(localStorage.getItem("user"));
     const totalPrice = this.calculTotalPanier();
+    const dateHeureRecup = this.addHours(this.state.dateHeureRecup, 1);
+    console.log(dateHeureRecup);
     const data = {
       id_user: user.user_id,
-      dateheure_recup: null,
+      dateheure_recup: dateHeureRecup,
       cmd_prix: totalPrice,
       cmd_over: 0,
       panier: this.props.articlesPanier
@@ -146,7 +147,6 @@ class PanierClass extends Component {
         console.log(err);
         this.setState({ error: true, errorMessage: err.message });
       });
-    // this.forceUpdate();
   };
 
   // retour au panier
@@ -270,18 +270,22 @@ class PanierClass extends Component {
                   </div>{" "}
                   <div className="flex_col">
                     <p className="italique">
-                      Commande à emporter et à régler sur place
+                      Nous ne livrons pas encore à domicile ! <br />
+                      Choisissez un moment pour venir retirer et régler votre
+                      commande à la brasserie: <br /> <br />
+                      (ouverture les jeudi et vendredi de 17h à 20h)
                     </p>
 
                     <DatePicker
-                      selected={this.state.startDate}
+                      selected={this.state.dateHeureRecup}
                       onChange={this.handleDate}
                       showTimeSelect
-                      // minTime={setHours(setMinutes(new Date(), 0), 17)}
-                      // maxTime={setHours(setMinutes(new Date(), 30), 20)}
                       minTime={new Date().setHours(17)}
                       maxTime={new Date().setHours(20)}
-                      dateFormat="dd/MM/yyyy"
+                      dateFormat="dd/MM/yyyy - HH:mm"
+                      timeFormat="HH:mm"
+                      filterDate={this.disableDate}
+                      locale="fr"
                     />
                     <button
                       className="validateButton"

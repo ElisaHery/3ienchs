@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./SideMenu.scss";
 
 const SideMenu = props => {
@@ -11,24 +11,39 @@ const SideMenu = props => {
     <nav className={MenuClasses}>
       <ul>
         <li className="li_left">
-          <Link to="/" style={{ cursor: "pointer" }}>
+          <NavLink
+            exact
+            activeClassName="isActive"
+            to="/"
+            style={{ cursor: "pointer" }}
+          >
             <span>Accueil</span>
-          </Link>
+          </NavLink>
         </li>
         <li className="li_left">
-          <Link to="/bieres">Nos bières</Link>
+          <NavLink exact activeClassName="isActive" to="/bieres">
+            Nos bières
+          </NavLink>
         </li>
         <li className="li_left">
-          <Link to="/apropos">À propos</Link>
+          <NavLink exact activeClassName="isActive" to="/apropos">
+            À propos
+          </NavLink>
         </li>
         <li className="li_left">
-          <Link to="/vente">Points de vente</Link>
+          <NavLink exact activeClassName="isActive" to="/vente">
+            Points de vente
+          </NavLink>
         </li>
         <li className="li_left">
-          <Link to="/login">Connexion</Link>
+          <NavLink exact activeClassName="isActive" to="/login">
+            Connexion
+          </NavLink>
         </li>
         <li className="li_left">
-          <Link to="/panier">Panier</Link>
+          <NavLink exact activeClassName="isActive" to="/panier">
+            Panier
+          </NavLink>
         </li>
       </ul>
     </nav>

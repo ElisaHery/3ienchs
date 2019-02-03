@@ -43,6 +43,10 @@
   color: #61dafb;
 }
 
+/* .isActive {
+  border-bottom: 2px solid white;
+} */
+
 .noscroll-class {
   overflow: hidden;
 }

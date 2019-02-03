@@ -23,8 +23,8 @@ const commandesModel = function commandesModel(connection) {
   const getUserCommandes = function getUserCommandes(clbk, user_id, over) {
     const q = "SELECT * FROM commandes WHERE cmd_id_user = ? AND cmd_over = ?";
     connection.query(q, [user_id, over], function(err, data, fields) {
-      console.log(this.sql);
-      console.log(data);
+      // console.log(this.sql);
+      // console.log(data);
       if (err) return clbk(err, null);
       else return clbk(null, data);
     });
@@ -53,8 +53,8 @@ const commandesModel = function commandesModel(connection) {
     const q =
       "SELECT cmd_id, cmd_date, cmd_dateheure_recup, cmd_prix, nom, det_qte_produit FROM commandes INNER JOIN details_commande on commandes.cmd_id = details_commande.det_id_comm INNER JOIN bieres on bieres.biere_id = details_commande.det_id_produit WHERE cmd_id_user = ? AND cmd_over = 0  ORDER BY det_id_comm ASC";
     connection.query(q, [user_id], function(err, data, fields) {
-      console.log(this.sql);
-      console.log(data);
+      // console.log(this.sql);
+      // console.log(data);
       if (err) return clbk(err, null);
       else return clbk(null, data);
     });
@@ -63,16 +63,17 @@ const commandesModel = function commandesModel(connection) {
   // USER : PASSER COMMANDE
 
   const createCommande = function createCommande(clbk, input) {
+    console.log("ce qu'on veut entrer en db ==>", input);
     const q =
       "INSERT into commandes (cmd_id_user, cmd_date, cmd_dateheure_recup, cmd_prix, cmd_over) VALUES (?, now(), ?, ?, ?)";
     const q2 =
       "INSERT into details_commande (det_id_comm, det_id_produit, det_qte_produit) VALUES (?, ?, ?)";
     const query1 = connection.query(
       q,
-      [input.id_user, input.dateheure, input.cmd_prix, input.cmd_over],
+      [input.id_user, input.dateheure_recup, input.cmd_prix, input.cmd_over],
       function(err, resultsFromQ1, fields) {
         if (err) return clbk(err, null);
-        //       console.log("resultats requete 1 --> ", resultsFromQ1);
+        // console.log("resultats requete 1 --> ", resultsFromQ1);
         else {
           const tmp = [];
           input.panier.forEach((element, i) => {
@@ -81,7 +82,7 @@ const commandesModel = function commandesModel(connection) {
               [resultsFromQ1.insertId, element.id, element.quantity],
               function(err, dataFromQ2, fields) {
                 console.log("requete 2 --> ", this.sql);
-                //             console.log("resultats requete 2 --> ", dataFromQ2);
+                console.log("resultats requete 2 --> ", dataFromQ2);
                 if (err) return clbk(err, null);
                 tmp.push(dataFromQ2);
                 if (i === input.panier.length - 1) {

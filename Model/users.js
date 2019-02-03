@@ -94,19 +94,19 @@ const usersModel = function usersModel(connection) {
     });
   };
 
-  const update = function updateUser(clbk, input) {
+  const update = function updateUser(clbk, data) {
     const q =
-      "UPDATE users SET user_nom = ?, user_prenom = ?, user_mail = ?, user_password = ? WHERE user_id = ?";
+      "UPDATE users SET user_nom = ?, user_prenom = ?, user_mail = ? WHERE user_id = ?";
     const payload = [
-      input.nom,
-      input.prenom,
-      input.mail,
-      input.password,
-      input.id
+      data.user_nom,
+      data.user_prenom,
+      data.user_mail,
+      data.user_id
     ];
     console.log(payload);
     connection.query(q, payload, function(err, data, fields) {
       console.log(this.sql);
+      console.log(data);
       if (err) return clbk(err, null);
       else return clbk(null, data);
     });

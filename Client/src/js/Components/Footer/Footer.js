@@ -71,7 +71,7 @@ class Footer extends Component {
               </a>
             </section>
 
-            <a href="./">© mentions légales</a>
+            <a href="/mentionslegales">© mentions légales</a>
           </div>
         </section>
       </Fragment>

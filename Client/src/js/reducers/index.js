@@ -2,22 +2,22 @@
 
 const initialState = {
   articlesPanier: [
-    {
-      typeBiere: "Big Daddy 33cl",
-      quantity: 3,
-      id: 1,
-      unitePrice: 3,
-      packable: 1,
-      totalPrice: 9
-    },
-    {
-      typeBiere: "Wawah 33cl",
-      quantity: 3,
-      id: 2,
-      unitePrice: 3,
-      packable: 1,
-      totalPrice: 9
-    }
+    // {
+    //   typeBiere: "Big Daddy 33cl",
+    //   quantity: 3,
+    //   id: 1,
+    //   unitePrice: 3,
+    //   packable: 1,
+    //   totalPrice: 9
+    // },
+    // {
+    //   typeBiere: "Wawah 33cl",
+    //   quantity: 3,
+    //   id: 2,
+    //   unitePrice: 3,
+    //   packable: 1,
+    //   totalPrice: 9
+    // }
   ],
   connectedUser: false,
   userPrenom: "",

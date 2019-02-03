@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { ConnectedUser, LogoutUser } from "./../../actions";
 import Moment from "react-moment";
+import Button from "./../../Components/Button/Button";
 
 import PathToBack from "../../PathToBack";
 import "./ClientDashboard.scss";
@@ -31,7 +32,11 @@ class ClientDashboardClass extends Component {
     showCommandes: true,
     showAccount: false,
     currentCommandes: [],
-    passedCommandes: []
+    passedCommandes: [],
+    editProfile: false,
+    editedUserNom: "",
+    editedUserPrenom: "",
+    editedUserMail: ""
   };
 
   //déclaration de la fonction pour appeler l'API
@@ -71,6 +76,12 @@ class ClientDashboardClass extends Component {
           showCommandes: !this.state.showCommandes,
           showAccount: !this.state.showAccount
         });
+        e.target.classList.add("active");
+        document
+          .getElementsByName("showCommandes")[0]
+          .classList.remove("active");
+        // const test = document.getElementsByName("showCommandes");
+        // console.log(test);
       } else return null;
     } else if (this.state.showAccount) {
       if (name !== "showAccount") {
@@ -78,6 +89,8 @@ class ClientDashboardClass extends Component {
           showCommandes: !this.state.showCommandes,
           showAccount: !this.state.showAccount
         });
+        e.target.classList.add("active");
+        document.getElementsByName("showAccount")[0].classList.remove("active");
       } else return null;
     }
   }
@@ -85,6 +98,68 @@ class ClientDashboardClass extends Component {
   sendInLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
+
+  activateEditProfileMode = () => {
+    this.setState({ editProfile: !this.state.editProfile });
+  };
+
+  modifyProfile = evt => {
+    console.log(evt.target.value);
+    this.setState({ [evt.target.name]: evt.target.value });
+  };
+
+  checkIfModifiedData = (newData, oldData) => {
+    if (newData.length > 0 && newData !== oldData) {
+      return newData;
+    } else {
+      return oldData;
+    }
+  };
+
+  editProfile = () => {
+    this.setState({ editProfile: !this.state.editProfile });
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("ancienne data ==>", user);
+
+    const editedNom = this.checkIfModifiedData(
+      this.state.editedUserNom,
+      user.user_nom
+    );
+    const editedPrenom = this.checkIfModifiedData(
+      this.state.editedUserPrenom,
+      user.user_prenom
+    );
+    const editedMail = this.checkIfModifiedData(
+      this.state.editedUserMail,
+      user.user_mail
+    );
+
+    const data = {
+      user_id: user.user_id,
+      user_nom: editedNom,
+      user_prenom: editedPrenom,
+      user_mail: editedMail
+    };
+
+    console.log("nouvelle data ==>", data);
+    const fetch_param = {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data)
+    };
+
+    this.callApi(`${PathToBack}user`, fetch_param)
+      .then(response => {
+        console.log(response);
+        this.sendInLocalStorage("user", data);
+        this.forceUpdate();
+      })
+
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: true, errorMessage: err.message });
+      });
+  };
 
   logOut(e) {
     // this.props.ConnectedUser(false);
@@ -98,17 +173,12 @@ class ClientDashboardClass extends Component {
   }
 
   render() {
-    // const userNom = this.props.userNom;
-    // const userPrenom = this.props.userPrenom;
-    // const userMail = this.props.userMail;
-
     const user = JSON.parse(localStorage.getItem("user") || "null");
     if (user) {
       userPrenom = user.user_prenom;
       userNom = user.user_nom;
       userMail = user.user_mail;
       userID = user.user_id;
-      // console.log(userPrenom, userNom, userMail, userID);
     }
 
     const token = JSON.parse(localStorage.getItem("token") || "null");
@@ -119,7 +189,11 @@ class ClientDashboardClass extends Component {
           <section className="dashboardContainer">
             <div className="menuDashboard">
               <ul>
-                <li name="showCommandes" onClick={e => this.toggleDashboard(e)}>
+                <li
+                  name="showCommandes"
+                  className="active"
+                  onClick={e => this.toggleDashboard(e)}
+                >
                   Mes commandes
                 </li>
                 <li name="showAccount" onClick={e => this.toggleDashboard(e)}>
@@ -155,7 +229,10 @@ class ClientDashboardClass extends Component {
                             <td>{e.cmd_prix.toFixed(2)} €</td>
                             <td>
                               {" "}
-                              <Moment format="DD/MM/YYYY">
+                              <Moment
+                                // add={{ hours: 1 }}
+                                format="DD/MM/YYYY  à  HH:mm"
+                              >
                                 {e.cmd_dateheure_recup}
                               </Moment>
                             </td>
@@ -201,15 +278,58 @@ class ClientDashboardClass extends Component {
 
               {this.state.showAccount && (
                 <Fragment>
-                  <p>
-                    <span>Nom :</span> <span>{userNom}</span>
+                  <p className="myAccount">
+                    <span>Nom :</span>{" "}
+                    {!this.state.editProfile ? (
+                      <span> {userNom} </span>
+                    ) : (
+                      <input
+                        placeholder={userNom}
+                        name="editedUserNom"
+                        onChange={this.modifyProfile}
+                      />
+                    )}
                   </p>
-                  <p>
-                    <span>Prénom :</span> <span>{userPrenom}</span>
+                  <p className="myAccount">
+                    <span>Prénom :</span>{" "}
+                    {!this.state.editProfile ? (
+                      <span> {userPrenom} </span>
+                    ) : (
+                      <input
+                        placeholder={userPrenom}
+                        name="editedUserPrenom"
+                        onChange={this.modifyProfile}
+                      />
+                    )}
                   </p>
-                  <p>
-                    <span>Mail :</span> <span>{userMail}</span>
+                  <p className="myAccount">
+                    <span>Mail :</span>{" "}
+                    {!this.state.editProfile ? (
+                      <span> {userMail} </span>
+                    ) : (
+                      <input
+                        placeholder={userMail}
+                        name="editedUserMail"
+                        onChange={this.modifyProfile}
+                      />
+                    )}
                   </p>
+
+                  {!this.state.editProfile ? (
+                    <button
+                      className="modifierProfil"
+                      onClick={this.activateEditProfileMode}
+                    >
+                      Modifier mon profil
+                    </button>
+                  ) : (
+                    <button
+                      className="modifierProfil"
+                      onClick={this.editProfile}
+                    >
+                      Valider
+                    </button>
+                  )}
                 </Fragment>
               )}
             </div>

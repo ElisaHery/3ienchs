@@ -2,6 +2,7 @@
   .dashboardContainer {
     display: flex;
     height: auto;
+    // min-height: 100vh;
     justify-content: center;
     margin: 20px auto 0px auto;
     padding-bottom: 6%;
@@ -13,6 +14,9 @@
       margin-right: 5px;
       width: 23%;
       ul {
+        .active {
+          text-decoration: underline;
+        }
         li {
           cursor: pointer;
           margin: 20px;
@@ -64,6 +68,28 @@
           background-color: #f2f2f2;
         }
       }
+
+      .myAccount {
+        font-size: 1.3em;
+        margin: 20px 20px 20px 47px;
+      }
+      .modifierProfil {
+        background: #ff0066;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.1em;
+        margin: 10px 0 20px 47px;
+        padding: 6px;
+        text-align: center;
+        transition: 0.4s;
+        width: 150px;
+        color: white;
+        &:hover {
+          background: black;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -83,6 +109,9 @@
       margin-right: 5px;
       width: 23%;
       ul {
+        .active {
+          text-decoration: underline;
+        }
         li {
           cursor: pointer;
           margin: 20px;
@@ -134,6 +163,28 @@
           background-color: #f2f2f2;
         }
       }
+
+      .myAccount {
+        font-size: 1.3em;
+        margin: 20px 20px 20px 47px;
+      }
+      .modifierProfil {
+        background: #ff0066;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1.1em;
+        margin: 10px 0 20px 47px;
+        padding: 6px;
+        text-align: center;
+        transition: 0.4s;
+        width: 150px;
+        color: white;
+        &:hover {
+          background: black;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -157,6 +208,9 @@
         display: flex;
         list-style: none;
         flex-wrap: wrap;
+        .active {
+          text-decoration: underline;
+        }
         li {
           margin: 7px;
           font-family: "roadgeek_2005_engschriftRg";
@@ -239,6 +293,28 @@
 
         &:nth-of-type(4):before {
           content: "Retrait";
+        }
+      }
+
+      .myAccount {
+        font-size: 1.1em;
+        margin: 20px 20px 20px 47px;
+      }
+      .modifierProfil {
+        background: #ff0066;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "roadgeek_2005_engschriftRg";
+        font-size: 1em;
+        margin: 10px 0 20px 47px;
+        padding: 6px;
+        text-align: center;
+        transition: 0.4s;
+        width: 150px;
+        color: white;
+        &:hover {
+          background: black;
+          color: white;
         }
       }
     }

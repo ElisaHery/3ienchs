@@ -7,7 +7,7 @@ import Apropos from "./Views/Apropos/Apropos.js";
 import Panier from "./Views/Panier/Panier.js";
 import Login from "./Views/Login/Login.js";
 import Contact from "./Views/Contact/Contact.js";
-import Legal from "./Views/Legal/Legal.js";
+import MentionsLegales from "./Views/MentionsLegales/MentionsLegales.js";
 import Vente from "./Views/Pointsvente/Vente.js";
 
 import "./App.css";
@@ -25,7 +25,7 @@ class App extends Component {
             <Route path="/panier" component={Panier} />
             <Route path="/login" component={Login} />
             <Route path="/contact" component={Contact} />
-            <Route path="/legal" component={Legal} />
+            <Route path="/mentionslegales" component={MentionsLegales} />
           </Switch>
         </Router>
       </Fragment>

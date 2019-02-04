@@ -2,8 +2,20 @@
   background: white;
   height: auto;
   min-height: 100vh;
-  // padding-top: 50px;
+  padding: 20px;
   position: relative;
   top: 55px;
-  width: 100%;
+  width: 95%;
+
+  h1 {
+    margin: 10px;
+    text-align: center;
+  }
+  .p_justify {
+    text-align: justify;
+  }
+
+  a {
+    color: #ff0066;
+  }
 }

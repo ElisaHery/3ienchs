@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { ConnectedUser } from "./../../actions";
+import Validator from "email-validator";
 
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer";
@@ -36,6 +37,10 @@ class LoginClass extends Component {
     inscriptionDiv: false,
     nouvelInscrit: false
   };
+
+  componentDidMount() {
+    this.setState({ error: false, errorMessage: "" });
+  }
 
   //switch entre l'affichage de la fenêtre de connexion ou d'inscription
   toggleDiv(e) {
@@ -74,6 +79,11 @@ class LoginClass extends Component {
       this.setState({
         error: true,
         errorMessage: "veuillez remplir tous les champs"
+      });
+    } else if (!Validator.validate(data.mail)) {
+      this.setState({
+        error: true,
+        errorMessage: "adresse mail non valide"
       });
     } else {
       const fetch_param = {
@@ -115,6 +125,11 @@ class LoginClass extends Component {
       this.setState({
         error: true,
         errorMessage: "veuillez remplir tous les champs"
+      });
+    } else if (!Validator.validate(data.mail)) {
+      this.setState({
+        error: true,
+        errorMessage: "adresse mail non valide"
       });
     } else if (this.state.password !== this.state.password2) {
       this.setState({

@@ -336,6 +336,15 @@ class ClientDashboardClass extends Component {
           </section>
         </Fragment>
       );
+    else
+      return (
+        <section className="dashboardContainer">
+          <div className="menuDashboard" />
+          <div className="dashboard">
+            <p className="title">Vous êtes déconnecté-e</p>
+          </div>
+        </section>
+      );
   }
 }
 

@@ -60,21 +60,38 @@ class Bieres extends Component {
           <section id="bieresSecondPart">
             <h2 className="title-bieres">LES CLASSIQUES</h2>
             <div className="bieres_vignettes">
-              {this.state.classicBieres.map(e => (
-                <BiereIndiv
-                  name={e.nom}
-                  srcImage={e.img}
-                  key={e.biere_id}
-                  id={e.biere_id}
-                  type={e.type}
-                  descr={e.descr}
-                  degre={e.degre}
-                  IBU={e.IBU}
-                  EBC={e.EBC}
-                  price={e.prixHT}
-                  packableStatus={e.packable}
-                />
-              ))}
+              {this.state.classicBieres.map(e =>
+                e.stock < 50 ? (
+                  <BiereIndiv
+                    name={e.nom}
+                    srcImage={e.img}
+                    key={e.biere_id}
+                    id={e.biere_id}
+                    type={e.type}
+                    descr={e.descr}
+                    degre={e.degre}
+                    IBU={e.IBU}
+                    EBC={e.EBC}
+                    price={e.prixHT}
+                    packableStatus={e.packable}
+                    indisponible={true}
+                  />
+                ) : (
+                  <BiereIndiv
+                    name={e.nom}
+                    srcImage={e.img}
+                    key={e.biere_id}
+                    id={e.biere_id}
+                    type={e.type}
+                    descr={e.descr}
+                    degre={e.degre}
+                    IBU={e.IBU}
+                    EBC={e.EBC}
+                    price={e.prixHT}
+                    packableStatus={e.packable}
+                  />
+                )
+              )}
             </div>
             <h2 className="title-bieres">LES SPECIALES</h2>
             <div className="bieres_vignettes">

@@ -49,9 +49,18 @@
         opacity: 1;
       }
     }
+
+    .isHidden {
+      visibility: hidden;
+    }
   }
 
   //   DEBUT ANIMATION
+
+  article.indisponible {
+    filter: grayscale(80%);
+    opacity: 0.5;
+  }
 
   article.contain {
     perspective: 800px;
@@ -106,6 +115,12 @@
       transform: rotateY(0deg);
       z-index: 2;
       /* on peut ajouter un background si c'est un texte */
+      .indisponible {
+        height: 0px;
+        font-size: 1.4em;
+        position: relative;
+        top: 45%;
+      }
     }
 
     /* paramètres par défaut de la face arrière */
@@ -159,9 +174,11 @@
     .descr_responsive_container {
       background: #f3f1f1;
       border-radius: 5px;
-      margin: 20px 0 20px 0;
+      margin: 20px 0 0px 0;
       min-height: 100px;
+      text-align: center;
       width: 70%;
+      max-width: 400px;
     }
     .input_container {
       display: flex;
@@ -183,9 +200,17 @@
         opacity: 1;
       }
     }
+    .isHidden {
+      visibility: hidden;
+    }
   }
 
   //   DEBUT ANIMATION
+
+  article.indisponible {
+    filter: grayscale(80%);
+    opacity: 0.5;
+  }
 
   article.contain {
     perspective: 800px;
@@ -239,6 +264,12 @@
       // transform: rotateY(0deg);
       z-index: 2;
       /* on peut ajouter un background si c'est un texte */
+      .indisponible {
+        height: 0px;
+        font-size: 1.4em;
+        position: relative;
+        top: 45%;
+      }
     }
 
     /* paramètres par défaut de la face arrière */

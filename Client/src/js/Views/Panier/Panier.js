@@ -6,7 +6,12 @@ import fr from "date-fns/locale/fr";
 import Moment from "react-moment";
 
 import { connect } from "react-redux";
-import { AddPanier, AddPricePanier, DeleteFromPanier } from "./../../actions";
+import {
+  AddPanier,
+  AddPricePanier,
+  DeleteFromPanier,
+  DeleteWholePanier
+} from "./../../actions";
 
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer.js";
@@ -21,7 +26,8 @@ const mapDispatchToProps = dispatch => {
   return {
     AddPanier: (product, bool) => dispatch(AddPanier(product, bool)),
     AddPricePanier: product => dispatch(AddPricePanier(product)),
-    DeleteFromPanier: product => dispatch(DeleteFromPanier(product))
+    DeleteFromPanier: product => dispatch(DeleteFromPanier(product)),
+    DeleteWholePanier: () => dispatch(DeleteWholePanier())
   };
 };
 
@@ -69,6 +75,7 @@ class PanierClass extends Component {
       event.target.setAttribute("class", "isHidden");
       const inputToShow = document.getElementsByName(biere);
       inputToShow.forEach(e => e.classList.remove("isHidden"));
+      console.log(inputToShow);
     } else {
       const changePanier = { typeBiere: biere, quantity: +event.target.value };
       this.props.AddPanier(changePanier, true);
@@ -83,6 +90,8 @@ class PanierClass extends Component {
       quantity: +event.target.children[0].value
     };
     this.props.AddPanier(newPanier, true);
+    console.log("quand on valide l'input", event.target);
+    event.target.setAttribute("class", "isHidden");
     // this.updateTotalprice();
   }
 
@@ -140,6 +149,7 @@ class PanierClass extends Component {
     this.callApi(`${PathToBack}commande`, fetch_param)
       .then(response => {
         console.log(response);
+        this.props.DeleteWholePanier();
         this.props.history.push("/login");
       })
 
@@ -163,10 +173,10 @@ class PanierClass extends Component {
         <Header />
         <div className="panierPageWrap">
           <h1>Mon Panier</h1>
-          <p className="p_professionnel">
+          {/* <p className="p_professionnel">
             Professionel ? <Link to="/contact">Contactez-nous</Link> pour un
             service personnalisé
-          </p>
+          </p> */}
 
           <section className="mainPanier">
             <div className="leftPanier">
@@ -200,25 +210,45 @@ class PanierClass extends Component {
                           />{" "}
                         </td>
                         <td>
-                          {" "}
-                          <select
-                            placeholder={article.quantity}
-                            value={article.quantity}
-                            onChange={e =>
-                              this.handleUpdateQty(e, article.typeBiere)
-                            }
-                          >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10+">10 ou +</option>
-                          </select>
+                          {article.quantity < 10 ? (
+                            <select
+                              placeholder={article.quantity}
+                              value={article.quantity}
+                              onChange={e =>
+                                this.handleUpdateQty(e, article.typeBiere)
+                              }
+                            >
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10+">10 ou +</option>
+                            </select>
+                          ) : (
+                            <form
+                              onSubmit={e =>
+                                this.handleUpdateFormQty(e, article.typeBiere)
+                              }
+                            >
+                              <input
+                                type="number"
+                                min="0"
+                                placeholder={article.quantity}
+                                name={article.typeBiere}
+                              />
+                              <input
+                                value="ok"
+                                type="submit"
+                                name={article.typeBiere}
+                              />
+                            </form>
+                          )}
+
                           <form
                             onSubmit={e =>
                               this.handleUpdateFormQty(e, article.typeBiere)

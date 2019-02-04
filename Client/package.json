@@ -7,6 +7,7 @@
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
+    "email-validator": "^2.0.4",
     "moment": "^2.24.0",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",

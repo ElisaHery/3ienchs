@@ -23,6 +23,11 @@ export const DeleteFromPanier = articlesToDelete => ({
   payload: articlesToDelete
 });
 
+export const DeleteWholePanier = el => ({
+  type: "DELETE_ALL_PANIER",
+  payload: el
+});
+
 export const ConnectedUser = connectedUser => ({
   type: "CONNECTED_USER",
   payload: connectedUser

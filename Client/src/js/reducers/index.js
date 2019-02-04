@@ -186,9 +186,12 @@ const rootReducer = (state = initialState, action) => {
         connectedUser: false,
         userMail: ""
       };
-    //   // ...state,
-    //   // filtered_themes: [...state.filtered_themes, action.payload]
-    // };
+
+    case "DELETE_ALL_PANIER":
+      return {
+        ...state,
+        articlesPanier: []
+      };
 
     default:
       return state;

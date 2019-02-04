@@ -45,10 +45,19 @@ class BiereIndivClass extends Component {
       <Fragment>
         <div id="biereIndivContainer">
           {/* <img src={this.props.srcImage} alt={this.props.name} /> */}
+          {/* <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}> */}
 
-          <article className="contain">
+          <article
+            className={
+              this.props.indisponible ? "contain + indisponible" : "contain"
+            }
+          >
             <div className="main une">
               <div className="avant">
+                {this.props.indisponible && (
+                  <p className="indisponible">Indisponible</p>
+                )}
+
                 <figure>
                   <img src={this.props.srcImage} alt={this.props.name} />
                 </figure>
@@ -84,7 +93,14 @@ class BiereIndivClass extends Component {
               {this.props.IBU} IBU • {this.props.EBC} EBC
             </p>
           </div>
-          <div className="input_container">
+          {this.props.indisponible}
+          <div
+            className={
+              this.props.indisponible
+                ? "input_container + isHidden"
+                : "input_container"
+            }
+          >
             <input type="number" min="0" onChange={e => this.handleChange(e)} />
             <button className="add_button" onClick={e => this.handleClick(e)}>
               Ajouter au panier

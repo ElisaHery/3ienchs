@@ -91,8 +91,6 @@ const commandesModel = function commandesModel(connection) {
               }
             );
           });
-
-          console.log("renvoie au front -->", tmp);
         }
       }
     );

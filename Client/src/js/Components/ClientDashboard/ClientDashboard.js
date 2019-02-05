@@ -229,10 +229,7 @@ class ClientDashboardClass extends Component {
                             <td>{e.cmd_prix.toFixed(2)} €</td>
                             <td>
                               {" "}
-                              <Moment
-                                // add={{ hours: 1 }}
-                                format="DD/MM/YYYY  à  HH:mm"
-                              >
+                              <Moment format="DD/MM/YYYY  à  HH:mm">
                                 {e.cmd_dateheure_recup}
                               </Moment>
                             </td>

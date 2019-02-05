@@ -91,7 +91,7 @@ class PanierClass extends Component {
     };
     this.props.AddPanier(newPanier, true);
     console.log("quand on valide l'input", event.target);
-    event.target.setAttribute("class", "isHidden");
+    // event.target.setAttribute("class", "isHidden");
     // this.updateTotalprice();
   }
 
@@ -125,13 +125,31 @@ class PanierClass extends Component {
     }
   };
 
+  // timeConverter = timestamp => {
+  //   var year = timestamp.getFullYear();
+  //   var month = timestamp.getMonth();
+  //   var date = timestamp.getDate();
+  //   var hour = timestamp.getHours();
+  //   var min = timestamp.getMinutes();
+  //   var sec = timestamp.getSeconds();
+  //   var time =
+  //     date + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec;
+  //   console.log("date nouveau format -->", time);
+  //   return time;
+  // };
+
   // gère la validation de la commande
   validateCommande = () => {
     document.body.classList.remove("noscroll-class");
     let user = JSON.parse(localStorage.getItem("user"));
     const totalPrice = this.calculTotalPanier();
+    //LOCAL :
     const dateHeureRecup = this.addHours(this.state.dateHeureRecup, 1);
-    console.log(dateHeureRecup);
+    // const dateHeureRecup = this.addHours(this.state.dateHeureRecup, 2);
+    // const dateHeureRecup = this.state.dateHeureRecup;
+
+    console.log("date -->", dateHeureRecup);
+    // const dateHeurerecup = this.timeConverter(dateHeureRecupTS);
     const data = {
       id_user: user.user_id,
       dateheure_recup: dateHeureRecup,
@@ -210,44 +228,45 @@ class PanierClass extends Component {
                           />{" "}
                         </td>
                         <td>
-                          {article.quantity < 10 ? (
-                            <select
+                          {/* {article.quantity < 10 ? ( */}
+                          <select
+                            placeholder={article.quantity}
+                            value={article.quantity}
+                            onChange={e =>
+                              this.handleUpdateQty(e, article.typeBiere)
+                            }
+                          >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10 ou +</option>
+                          </select>
+                          {/* ) : ( */}
+                          {/* <form
+                            onSubmit={e =>
+                              this.handleUpdateFormQty(e, article.typeBiere)
+                            }
+                          >
+                            <input
+                              type="number"
+                              min="0"
+                              class
                               placeholder={article.quantity}
-                              value={article.quantity}
-                              onChange={e =>
-                                this.handleUpdateQty(e, article.typeBiere)
-                              }
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10+">10 ou +</option>
-                            </select>
-                          ) : (
-                            <form
-                              onSubmit={e =>
-                                this.handleUpdateFormQty(e, article.typeBiere)
-                              }
-                            >
-                              <input
-                                type="number"
-                                min="0"
-                                placeholder={article.quantity}
-                                name={article.typeBiere}
-                              />
-                              <input
-                                value="ok"
-                                type="submit"
-                                name={article.typeBiere}
-                              />
-                            </form>
-                          )}
+                              name={article.typeBiere}
+                            />
+                            <input
+                              value="ok"
+                              type="submit"
+                              name={article.typeBiere}
+                            />
+                          </form> */}
+                          {/* )} */}
 
                           <form
                             onSubmit={e =>

@@ -9,7 +9,7 @@ import Backdrop from "../../Components/Header/BurgerMenu/Backdrop.js";
 // import PathToBack from "../../PathToBack";
 
 import Logo from "./../../../assets/logos/3ienchs_baseline.png";
-import BigDaddy from "./../../../assets/images/bigdaddy1.jpg";
+import BigDaddy from "./../../../assets/images/bigdaddy.jpg";
 
 import "./Home.scss";
 
@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     let backdrop;
-
+    //fair eautrement car quand backdrop n'existe pas elle n'est pas affichée
     if (this.state.sideMenuOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />;
     }

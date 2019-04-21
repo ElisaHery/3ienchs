@@ -15,6 +15,7 @@ const bieresApi = function bieresApi(connection) {
 
   router.get("/classicbieres", (req, res) => {
     bieresModel.getClassicBieres((err, dataset) => {
+      console.log("je suis dans l'API");
       res.send(dataset);
     }, null);
   });

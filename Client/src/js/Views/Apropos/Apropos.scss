@@ -1,13 +1,11 @@
 #AproposPageWrap {
   background: white;
   height: auto;
-  // padding-top: 50px;
   position: relative;
   top: 55px;
   width: 100%;
 
   #AproposFirstPart {
-    // background-image: url("https://elisahery.com/images3ienchs/serveur.jpg");
     background-image: url("./../../../assets/images/serveur.jpg");
     background-size: cover;
     height: 100vh;
@@ -49,7 +47,6 @@
     .presentation {
       font-size: 1.2em;
       line-height: 1.5em;
-      // margin: auto;
       padding: 5% 0 3% 0;
       text-align: center;
       width: 50%;
@@ -69,7 +66,6 @@
     .presentation_suite {
       font-size: 1.2em;
       line-height: 1.5em;
-      // margin: auto;
       padding: 2% 0 3% 0;
       text-align: center;
       width: 50%;

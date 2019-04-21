@@ -9,14 +9,6 @@ const initialState = {
     //   unitePrice: 3,
     //   packable: 1,
     //   totalPrice: 9
-    // },
-    // {
-    //   typeBiere: "Wawah 33cl",
-    //   quantity: 3,
-    //   id: 2,
-    //   unitePrice: 3,
-    //   packable: 1,
-    //   totalPrice: 9
     // }
   ],
   connectedUser: false,

@@ -40,7 +40,7 @@ class Bieres extends Component {
   };
 
   render() {
-    if (this.state.classicBieres.length === 0) return null;
+    // if (this.state.classicBieres.length === 0) return null;
     // console.log(this.state.response);
     return (
       <Fragment>
